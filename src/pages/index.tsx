@@ -1,9 +1,6 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { HeadingL1 } from "src/modules/shared/components/HeadingL1";
-import { HeadingL2 } from "src/modules/shared/components/HeadingL2";
-
-// Create a Title component that'll render an <h1> tag with some styles
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { Heading1 } from 'src/modules/shared/components/Heading1';
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +11,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeadingL1>
+      <Heading1>
         <em>TECH</em> zone
-      </HeadingL1>
+      </Heading1>
     </div>
   );
 };
