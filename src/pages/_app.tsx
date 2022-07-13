@@ -1,7 +1,9 @@
-import type { AppProps } from "next/app";
-import { theme } from "src/modules/shared/theming/theme";
-import { ThemeProvider } from "styled-components";
-import "styles/globals.css";
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from '@emotion/react';
+
+import { theme } from 'src/modules/shared/theming/theme';
+
+import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

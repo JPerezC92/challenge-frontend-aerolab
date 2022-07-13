@@ -1,8 +1,11 @@
-import styled, { css } from 'styled-components';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-import { DeviceSize } from 'src/modules/shared/theming/DeviceSize';
+import { TitleL1 } from 'src/modules/shared/theming/sharedStyles/title/TitleL1';
 
 export const Heading1 = styled.h1`
+  ${TitleL1}
+
   ${({ theme: { Colors, Typography } }) => css`
     letter-spacing: 0;
     text-transform: uppercase;
@@ -15,10 +18,6 @@ export const Heading1 = styled.h1`
       color: transparent;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-
-    @media (max-width: ${DeviceSize.TABLET}) {
-      font: ${({ theme: { Typography } }) => Typography.title.l1.mobile};
     }
   `}
 `;

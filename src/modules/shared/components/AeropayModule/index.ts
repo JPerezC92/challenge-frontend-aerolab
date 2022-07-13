@@ -1,0 +1,1 @@
+export { AeropayModule } from './AeropayModule';

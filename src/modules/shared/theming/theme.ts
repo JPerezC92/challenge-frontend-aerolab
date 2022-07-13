@@ -45,6 +45,17 @@ export const theme = {
     },
   },
   Colors,
+  Margins: {
+    desktop: '80px',
+    mobile: '20px',
+  },
+  Paddings: {
+    desktop: '80px',
+    mobile: '20px',
+  },
+  Grid: {
+    maxWidth: '1464px',
+  },
 } as const;
 
 export type InternalTheme = typeof theme;
