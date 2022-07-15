@@ -8,20 +8,23 @@ import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { DropDown } from 'src/modules/shared/components/DropDown';
 import { Aeropay1 } from 'src/modules/shared/components/icons/Aeropay1';
 import { Icon } from 'src/modules/shared/components/icons/Icon';
-import { DeviceSize } from 'src/modules/shared/theming/DeviceSize';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
+import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 
 const NavBarStyled = styled.header`
+  ${DesktopMaxWidth}
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-block: 40px;
-  margin: 0 auto;
 
-  ${({ theme: { Paddings, Grid } }) => css`
-    padding-inline: ${Paddings.desktop};
-    max-width: ${Grid.maxWidth};
+  & > div {
+    z-index: 1;
+  }
 
-    @media (max-width: ${DeviceSize.TABLET}) {
+  ${({ theme: { Paddings } }) => css`
+    @media (max-width: ${MediaQuery.TABLET.max}) {
       padding-inline: ${Paddings.mobile};
     }
   `}

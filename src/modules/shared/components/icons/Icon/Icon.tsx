@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { DeviceSize } from 'src/modules/shared/theming/DeviceSize';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 
 const enum IconSize {
   SM = 'sm',
@@ -26,7 +26,7 @@ export const IconMD = styled(IconDefault)`
         width: 32px;
         height: 32px;
 
-        @media (max-width: ${DeviceSize.TABLET}) {
+        @media (max-width: ${MediaQuery.TABLET.max}) {
           width: 24px;
           height: 24px;
         }
@@ -42,7 +42,7 @@ export const IconSM = styled(IconMD)`
         width: 24px;
         height: 24px;
 
-        @media (max-width: ${DeviceSize.TABLET}) {
+        @media (max-width: ${MediaQuery.TABLET.max}) {
           width: 20px;
           height: 20px;
         }

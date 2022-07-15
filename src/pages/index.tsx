@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Heading1 } from 'src/modules/shared/components/base/Heading1';
-import { Text1 } from 'src/modules/shared/components/base/Text1';
+import { Hero } from 'src/modules/shared/components/Hero';
 import { NavBar } from 'src/modules/shared/components/NavBar';
 
 const Home: NextPage = () => {
@@ -16,16 +15,14 @@ const Home: NextPage = () => {
 
       <NavBar />
 
-      <Text1 variant="allCaps">Explore the</Text1>
+      <Hero />
 
-      <Heading1>
-        <em>TECH</em> zone
-      </Heading1>
-
-      <Text1>
-        Here you’ll be able to redeem all of your hard-earned Aeropoints and
-        exchange them for cool tech.
-      </Text1>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos eveniet,
+        mollitia eaque reprehenderit ut maiores nulla iure. Temporibus minima,
+        eaque nam nostrum quibusdam tempore magnam nisi facere. Facere, dicta.
+        Nulla.
+      </div>
     </div>
   );
 };

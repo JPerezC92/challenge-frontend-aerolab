@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { DeviceSize } from 'src/modules/shared/theming/DeviceSize';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { SharedStyles } from 'src/modules/shared/theming/sharedStyles/SharedStyles';
 
 export const TitleL1: SharedStyles = ({ theme: { Colors, Typography } }) => css`
@@ -9,7 +9,7 @@ export const TitleL1: SharedStyles = ({ theme: { Colors, Typography } }) => css`
   color: ${Colors.neutral[900]};
   font: ${Typography.title.l1.desktop};
 
-  @media (max-width: ${DeviceSize.TABLET}) {
+  @media (max-width: ${MediaQuery.TABLET.max}) {
     font: ${Typography.title.l1.mobile};
   }
 `;

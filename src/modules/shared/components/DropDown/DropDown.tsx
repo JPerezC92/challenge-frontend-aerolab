@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { Arrow } from 'src/modules/shared/components/icons/Arrow';
+import { ChevronDown } from 'src/modules/shared/components/icons/ChevronDown';
 import { Icon } from 'src/modules/shared/components/icons/Icon';
 
 const DropDownStyled = styled.div`
@@ -51,7 +51,7 @@ export const DropDown: React.FC<DropDownProps> = ({ Menu, icon, children }) => {
         </span>
 
         <Icon size="md">
-          <Arrow open={toogle} />
+          <ChevronDown open={toogle} />
         </Icon>
       </button>
 

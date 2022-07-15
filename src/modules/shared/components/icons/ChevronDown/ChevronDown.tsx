@@ -8,7 +8,7 @@ type ArrowProps = {
   open: boolean;
 };
 
-export const Arrow = styled(ChevronDefault)<ArrowProps>`
+export const ChevronDown = styled(ChevronDefault)<ArrowProps>`
   ${({ open = false }) =>
     css`
       transition: transform 0.2s ease-out;

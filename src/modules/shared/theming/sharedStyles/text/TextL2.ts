@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { DeviceSize } from 'src/modules/shared/theming/DeviceSize';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { SharedStyles } from 'src/modules/shared/theming/sharedStyles/SharedStyles';
 
 export const TextL2Default: SharedStyles = ({ theme: { Typography } }) => css`
@@ -8,7 +8,7 @@ export const TextL2Default: SharedStyles = ({ theme: { Typography } }) => css`
   letter-spacing: normal;
   text-transform: none;
 
-  @media (max-width: ${DeviceSize.TABLET}) {
+  @media (max-width: ${MediaQuery.TABLET.max}) {
     font: ${Typography.text.l2.default.mobile};
   } ;
 `;
@@ -18,7 +18,7 @@ export const TextL2AllCaps: SharedStyles = ({ theme: { Typography } }) => css`
   letter-spacing: 0.05rem;
   text-transform: uppercase;
 
-  @media (max-width: ${DeviceSize.TABLET}) {
+  @media (max-width: ${MediaQuery.TABLET.max}) {
     font: ${Typography.text.l2.allCaps.mobile};
   } ;
 `;
