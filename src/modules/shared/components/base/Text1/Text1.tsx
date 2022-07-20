@@ -12,23 +12,13 @@ const enum Text1Variant {
 
 type Text1Props = {
   variant?: `${Text1Variant}`;
+  brand?: boolean;
 };
 
 const Text1Default = styled.p<Text1Props>`
   ${TextL1.TextL1Default}
 
-  & > em {
-    display: inline-block;
-    ${ColorBrandDefault}
-  }
-
-  ${({ theme: { Colors } }) => css`
-    color: ${Colors.neutral[600]};
-
-    & > b {
-      color: ${Colors.neutral[900]};
-    }
-  `};
+  ${({ brand }) => brand && ColorBrandDefault}
 `;
 
 const Text1AllCaps = styled(Text1Default)`

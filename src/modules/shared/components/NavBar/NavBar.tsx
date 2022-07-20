@@ -6,8 +6,8 @@ import { AeropayModule } from 'src/modules/shared/components/AeropayModule';
 import { AerolabLogo } from 'src/modules/shared/components/base/AerolabLogo';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { DropDown } from 'src/modules/shared/components/DropDown';
-import { Aeropay1 } from 'src/modules/shared/components/icons/Aeropay1';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { Aeropay1 } from 'src/modules/shared/icons/Aeropay1';
+import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 

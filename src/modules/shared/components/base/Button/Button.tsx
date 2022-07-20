@@ -11,7 +11,20 @@ type ButtonProps = {
   variant?: `${ButtonVariant}`;
 };
 
-export const ButtonDefault = styled.button<ButtonProps>`
+export const ButtonUnstyled = css`
+  color: initial;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+
+  &:hover {
+    background: transparent;
+  }
+`;
+
+export const ButtonDefault = styled.button`
   ${TextL1Default}
   align-items: center;
   border-radius: 1rem;
@@ -19,7 +32,8 @@ export const ButtonDefault = styled.button<ButtonProps>`
   column-gap: 0.5rem;
   display: flex;
   justify-content: center;
-  padding-block: 0.75rem;
+  /* TODO adjust padding */
+  padding-block: 1rem;
   padding-inline: 2.5rem;
 
   ${({ theme: { Colors } }) =>
@@ -33,20 +47,4 @@ export const ButtonDefault = styled.button<ButtonProps>`
     `}
 `;
 
-export const ButtonUnstyled = styled(ButtonDefault)`
-  ${({ variant }) =>
-    variant === ButtonVariant.UNSTYLED &&
-    css`
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin: 0;
-      line-height: 0;
-
-      &:hover {
-        background: transparent;
-      }
-    `}
-`;
-
-export const Button = styled(ButtonUnstyled)``;
+export const Button = styled(ButtonDefault)``;

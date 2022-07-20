@@ -1,0 +1,1 @@
+export {ProductCollection} from './ProductCollection'

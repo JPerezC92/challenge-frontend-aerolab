@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Hero } from 'src/modules/shared/components/Hero';
+import { ProductsSection } from 'src/modules/products/containers/ProductsSection';
+import { Container } from 'src/modules/shared/components/Container';
 import { NavBar } from 'src/modules/shared/components/NavBar';
 
 const Home: NextPage = () => {
@@ -15,14 +16,11 @@ const Home: NextPage = () => {
 
       <NavBar />
 
-      <Hero />
+      {/* <Hero /> */}
 
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos eveniet,
-        mollitia eaque reprehenderit ut maiores nulla iure. Temporibus minima,
-        eaque nam nostrum quibusdam tempore magnam nisi facere. Facere, dicta.
-        Nulla.
-      </div>
+      <Container>
+        <ProductsSection />
+      </Container>
     </div>
   );
 };

@@ -1,1 +1,0 @@
-export {ChevronDefault} from './ChevronDefault'

@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { Text2 } from 'src/modules/shared/components/base/Text2';
-import { Aeropay2 } from 'src/modules/shared/components/icons/Aeropay2';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { Aeropay2 } from 'src/modules/shared/icons/Aeropay2';
+import { Icon } from 'src/modules/shared/icons/Icon';
 
 export const AeropayCardStyled = styled.div`
   width: 264px;

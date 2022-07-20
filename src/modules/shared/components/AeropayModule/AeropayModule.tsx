@@ -2,13 +2,14 @@ import styled from '@emotion/styled';
 
 import { AeropayCard } from 'src/modules/shared/components/AeropayCard';
 import { Button } from 'src/modules/shared/components/base/Button';
+import { ButtonUnstyled } from 'src/modules/shared/components/base/Button/Button';
 import { Hr } from 'src/modules/shared/components/base/Hr';
 import { Menu } from 'src/modules/shared/components/base/Menu';
 import { Selector } from 'src/modules/shared/components/base/Selector';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
-import { Aeropay3 } from 'src/modules/shared/components/icons/Aeropay3';
-import { CrossDefault } from 'src/modules/shared/components/icons/CrossDefault';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { Aeropay3 } from 'src/modules/shared/icons/Aeropay3';
+import { CrossDefault } from 'src/modules/shared/icons/CrossDefault';
+import { Icon } from 'src/modules/shared/icons/Icon';
 
 type AeropayModuleProps = {
   className?: string;
@@ -34,6 +35,10 @@ export const AeropayModuleStyled = styled(Menu)`
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+
+      & > button {
+        ${ButtonUnstyled}
+      }
     }
 
     & > div:nth-of-type(1) {
@@ -73,7 +78,7 @@ export const AeropayModule: React.FC<AeropayModuleProps> = ({
         <header>
           <Text1 as="h3">Add Balance</Text1>
 
-          <Button variant="unstyled" type="button" onClick={onClose}>
+          <Button type="button" onClick={onClose}>
             <Icon size="sm">
               <CrossDefault />
             </Icon>

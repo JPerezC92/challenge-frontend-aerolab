@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { ChevronDown } from 'src/modules/shared/components/icons/ChevronDown';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { ChevronDown } from 'src/modules/shared/icons/ChevronDown';
+import { Icon } from 'src/modules/shared/icons/Icon';
 
 const DropDownStyled = styled.div`
   position: relative;

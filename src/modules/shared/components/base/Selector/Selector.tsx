@@ -48,14 +48,20 @@ const SelectorWrapperStyled = styled.span`
   text-align: center;
 `;
 
-export const Selector: React.FC<SelectorProps> = ({ label, ...props }) => {
+export const Selector: React.FC<SelectorProps> = ({
+  label,
+  className,
+  ...props
+}) => {
   const id = React.useId();
 
   return (
     <SelectorWrapperStyled>
       <SelectorStyled type="radio" id={id} {...props}></SelectorStyled>
 
-      <SelectorLabelStyled htmlFor={id}>{label}</SelectorLabelStyled>
+      <SelectorLabelStyled htmlFor={id} className={className}>
+        {label}
+      </SelectorLabelStyled>
     </SelectorWrapperStyled>
   );
 };

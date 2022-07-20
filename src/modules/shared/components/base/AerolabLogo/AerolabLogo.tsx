@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
-import { AerolabSVG1 } from 'src/modules/shared/components/base/AerolabSVG1';
-import { AerolabSVG2 } from 'src/modules/shared/components/base/AerolabSVG2';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { AerolabLogo1 } from 'src/modules/shared/icons/AerolabLogo1';
+import { AerolabLogo2 } from 'src/modules/shared/icons/AerolabLogo2';
+import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 
 const AerolabLogoStyled = styled.span`
@@ -32,11 +32,11 @@ export const AerolabLogo: React.FC<AerolabLogoProps> = ({}) => {
   return (
     <AerolabLogoStyled>
       <Icon>
-        <AerolabSVG1 />
+        <AerolabLogo1 />
       </Icon>
 
       <Icon>
-        <AerolabSVG2 />
+        <AerolabLogo2 />
       </Icon>
     </AerolabLogoStyled>
   );

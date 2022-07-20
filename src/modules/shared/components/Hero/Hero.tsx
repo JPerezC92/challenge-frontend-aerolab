@@ -5,8 +5,8 @@ import React from 'react';
 import { ButtonDefault } from 'src/modules/shared/components/base/Button/Button';
 import { Heading1 } from 'src/modules/shared/components/base/Heading1';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
-import { ArrowDown } from 'src/modules/shared/components/icons/ArrowDown';
-import { Icon } from 'src/modules/shared/components/icons/Icon';
+import { ArrowDown } from 'src/modules/shared/icons/ArrowDown';
+import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 
