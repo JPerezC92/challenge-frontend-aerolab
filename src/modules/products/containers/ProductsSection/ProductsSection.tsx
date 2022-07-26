@@ -6,7 +6,7 @@ import { ProductCardSkeleton } from 'src/modules/products/components/ProductCard
 import { ProductsGridSkeleton } from 'src/modules/products/components/ProductsGridSkeleton';
 import { ProductsGrid } from 'src/modules/products/containers/ProductsGrid';
 import { Product } from 'src/modules/products/models/Product';
-import { useChallengeProductsRepository } from 'src/modules/products/service/products.repository';
+import { useChallengeProductsRepository } from 'src/modules/products/service/useChallengeProductsRepository';
 import { Heading2 } from 'src/modules/shared/components/base/Heading2';
 import { RecolorNeutral } from 'src/modules/shared/components/Recolor';
 import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';

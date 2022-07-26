@@ -15,6 +15,7 @@ const DropDownStyled = styled.div`
     display: flex;
     padding-inline: 1rem;
     padding-block: 0.5rem;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
 
     ${({ theme: { Colors } }) => css`
       border: 1px solid ${Colors.neutral[300]};

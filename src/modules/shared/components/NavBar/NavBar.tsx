@@ -1,7 +1,8 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import React from 'react';
 
+import { useAuthenticationContext } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 import { AeropayModule } from 'src/modules/shared/components/AeropayModule';
 import { AerolabLogo } from 'src/modules/shared/components/base/AerolabLogo';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
@@ -31,6 +32,8 @@ const NavBarStyled = styled.header`
 `;
 
 export const NavBar: React.FC = () => {
+  const { user } = useAuthenticationContext();
+
   return (
     <NavBarStyled>
       <AerolabLogo />
@@ -43,9 +46,7 @@ export const NavBar: React.FC = () => {
         }
         Menu={AeropayModule}
       >
-        <Text1>
-          <em>1000</em>
-        </Text1>
+        <Text1 brand>{user?.points || 0} </Text1>
       </DropDown>
     </NavBarStyled>
   );
