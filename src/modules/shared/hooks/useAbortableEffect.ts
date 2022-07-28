@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function useAbortableEffect(
-  fn: (abortController: AbortController) => void,
+  fn: (abortController: AbortController) => ReturnType<React.EffectCallback>,
   deps: React.DependencyList
 ): void {
   const abortControllerRef = React.useRef<AbortController>();
@@ -10,9 +10,12 @@ export function useAbortableEffect(
     abortControllerRef.current?.abort();
     abortControllerRef.current = new AbortController();
 
-    fn(abortControllerRef.current);
+    const cleanFn = fn(abortControllerRef.current);
 
-    return () => abortControllerRef.current?.abort();
+    return () => {
+      abortControllerRef.current?.abort();
+      cleanFn?.();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

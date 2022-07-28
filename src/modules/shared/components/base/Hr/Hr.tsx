@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export const Hr = styled.hr`
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: none;
-  width: 1px;
-  ${({ theme: { Colors } }) =>
-    css`
-      background-color: ${Colors.neutral[300]};
-    `};
-`;
+interface HrProps {
+  vertical?: boolean;
+}
+
+export const Hr = styled.hr(({ theme: { Colors } }) => [
+  {
+    margin: '0',
+    padding: '0',
+    border: 'none',
+    height: '1px',
+    background: Colors.neutral[300],
+  },
+]);

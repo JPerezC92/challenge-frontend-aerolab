@@ -26,4 +26,13 @@ export class Product {
     this.img = props.img;
     this.name = props.name;
   }
+
+  public aditionalPointsNeeded(userPoints: number): number {
+    const aditionalPointsNeeded = this.cost - userPoints;
+    return aditionalPointsNeeded > 0 ? aditionalPointsNeeded : 0;
+  }
+
+  public static formatPoints(cost: number): string {
+    return cost.toLocaleString().replace(',', '.');
+  }
 }

@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { ProductRedeemEventListener } from 'src/modules/products/events/ProductRedeem.event';
 import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';
 import { User } from 'src/modules/users/models/User';
 import { useChallengeUsersRepository } from 'src/modules/users/service/useChallengeUsersRepository';
@@ -49,7 +50,7 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
 
   useAbortableEffect(
     (abortController) => {
-      (async () => {
+      const handleAuthentication = async () => {
         dispatch({ type: AuthenticationActionType.LOGIN });
 
         const _usersRepository = usersRepository(abortController.signal);
@@ -67,7 +68,16 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
           type: AuthenticationActionType.SUCCEEDED,
           payload: user,
         });
-      })();
+        console.log({ abortController });
+      };
+
+      handleAuthentication();
+
+      // listening for Events
+      const cleanProductRedeemEventListener =
+        ProductRedeemEventListener(handleAuthentication);
+
+      return () => cleanProductRedeemEventListener();
     },
     [usersRepository]
   );

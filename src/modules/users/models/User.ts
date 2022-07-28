@@ -17,4 +17,8 @@ export class User {
     this.points = props.points;
     this.createdAt = props.createdAt;
   }
+
+  public hasEnoughPoints(productCost: number) {
+    return this.points >= productCost;
+  }
 }

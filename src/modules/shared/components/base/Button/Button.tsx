@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import {
+  BackgroundBrandDefault,
+  BackgroundBrandHover,
+} from 'src/modules/shared/theming/sharedStyles/backgrounds/BackgroundBrandDefault';
+import { ColorNeutral100 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
+import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevation';
+import { SharedStyles } from 'src/modules/shared/theming/sharedStyles/SharedStyles';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
 const enum ButtonVariant {
@@ -24,27 +31,49 @@ export const ButtonUnstyled = css`
   }
 `;
 
-export const ButtonDefault = styled.button`
-  ${TextL1Default}
-  align-items: center;
-  border-radius: 1rem;
-  border: none;
-  column-gap: 0.5rem;
-  display: flex;
-  justify-content: center;
-  /* TODO adjust padding */
-  padding-block: 1rem;
-  padding-inline: 2.5rem;
+const Busy: SharedStyles = ({ theme: { Colors } }) =>
+  css({
+    ['&[aria-busy=true]']: {
+      opacity: 0.5,
+      background: Colors.specials.bg.section,
+      pointerEvents: 'none',
+    },
+  });
 
-  ${({ theme: { Colors } }) =>
-    css`
-      background: ${Colors.brand.default};
-      color: ${Colors.neutral[100]};
+const Disabled: SharedStyles = ({ theme: { Colors } }) =>
+  css({
+    ['&:disabled']: {
+      background: Colors.neutral[200],
+      color: Colors.neutral[600],
 
-      &:hover {
-        background: ${Colors.brand.hover};
-      }
-    `}
-`;
+      ['path']: {
+        fill: Colors.neutral[0],
+      },
+
+      ['rect']: {
+        fill: Colors.neutral[500],
+      },
+    },
+  });
+
+export const ButtonDefault = styled.button([
+  TextL1Default,
+  BackgroundBrandDefault,
+  ColorNeutral100,
+  BackgroundBrandHover,
+  Busy,
+  Disabled,
+  ElevationDefault,
+  {
+    alignItems: 'center',
+    borderRadius: '1rem',
+    border: 'none',
+    columnGap: '.5rem',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBlock: '1rem',
+    paddingInline: '2.5rem',
+  },
+]);
 
 export const Button = styled(ButtonDefault)``;

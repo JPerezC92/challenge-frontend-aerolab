@@ -6,7 +6,7 @@ type Aeropay3Props = {
   className?: string;
 };
 
-export const Aeropay3: React.FC<Aeropay3Props> = ({}) => {
+export const Aeropay3: React.FC<Aeropay3Props> = ({ className }) => {
   return (
     <Svg
       width="24"
@@ -14,6 +14,7 @@ export const Aeropay3: React.FC<Aeropay3Props> = ({}) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <rect width="24" height="24" rx="12" fill="white" />
       <path

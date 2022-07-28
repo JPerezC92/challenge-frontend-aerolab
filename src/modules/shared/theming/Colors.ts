@@ -9,7 +9,7 @@ const SpecialColors = {
   cornflowerBlue: '#7296EB',
   electricLavender: '#EAC0E9',
   blueDress: BrandColors.blueDress,
-  fuchsiaPink: BrandColors.blueDress,
+  fuchsiaPink: BrandColors.fuchsiaPink,
 };
 
 export const Colors = {
@@ -31,15 +31,15 @@ export const Colors = {
     light: '#FFDFD9',
   },
   brand: {
-    default: `linear-gradient(102.47deg, ${BrandColors.blueDress} -5.34%, ${BrandColors.fuchsiaPink} 106.58%)`,
-    hover: `linear-gradient(102.47deg, ${BrandColors.blueEyes} -5.34%, ${BrandColors.violet} 106.58%)`,
+    default: `linear-gradient(102.47deg, ${BrandColors.blueDress}, ${BrandColors.fuchsiaPink})`,
+    hover: `linear-gradient(102.47deg, ${BrandColors.blueEyes}, ${BrandColors.violet})`,
     light: '#E5F0FF',
     light2: '#CCE1FF',
   },
   specials: {
     bg: {
-      illustration: `linear-gradient(102.47deg, ${SpecialColors.cornflowerBlue} -5.34%, ${SpecialColors.electricLavender} 106.58%, ${SpecialColors.electricLavender} 106.58%)`,
-      section: `linear-gradient(102.47deg, ${SpecialColors.blueDress} -5.34%, ${SpecialColors.fuchsiaPink} 106.58%)`,
+      illustration: `linear-gradient(102.47deg, ${SpecialColors.cornflowerBlue}, ${SpecialColors.electricLavender}, ${SpecialColors.electricLavender})`,
+      section: `linear-gradient(102.47deg, ${SpecialColors.blueDress}, ${SpecialColors.fuchsiaPink})`,
     },
   },
 };

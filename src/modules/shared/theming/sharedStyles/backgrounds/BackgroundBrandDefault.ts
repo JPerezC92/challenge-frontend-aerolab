@@ -7,6 +7,14 @@ export const BackgroundBrandDefault: SharedStyles = ({
   background: ${Colors.brand.default};
 `;
 
+export const BackgroundBrandHover: SharedStyles = ({
+  theme: { Colors },
+}) => css`
+  &:hover {
+    background: ${Colors.brand.hover};
+  }
+`;
+
 export const BackgroundSpecialIllustration: SharedStyles = ({
   theme: { Colors },
 }) => css`

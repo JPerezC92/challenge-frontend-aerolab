@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  compiler: { styledComponents: true },
+  compiler: { emotion: { autoLabel: 'dev-only' } },
   images: { domains: ['coding-challenge-api.aerolab.co'] },
 };
 

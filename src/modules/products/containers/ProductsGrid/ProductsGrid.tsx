@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { PaginationControls } from 'src/modules/products/components/PaginationControls';
-import { ProductCard } from 'src/modules/products/components/ProductCard';
 import { ProductsQueryControls } from 'src/modules/products/components/ProductsQueryControls';
 import { SortSelector } from 'src/modules/products/components/SortSelector';
+import { ProductCard } from 'src/modules/products/containers/ProductCard';
 import {
   ALL_PRODUCTS,
   FilterActionType,
@@ -144,7 +144,7 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
         <ProductsGridStyled>
           {products.map((p) => (
             <li key={p.id}>
-              <ProductCard {...p} />
+              <ProductCard product={p} />
             </li>
           ))}
         </ProductsGridStyled>
