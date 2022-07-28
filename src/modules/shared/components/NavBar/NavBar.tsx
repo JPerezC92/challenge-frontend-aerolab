@@ -20,10 +20,6 @@ const NavBarStyled = styled.header`
   justify-content: space-between;
   padding-block: 40px;
 
-  & > div {
-    z-index: 1;
-  }
-
   ${({ theme: { Paddings } }) => css`
     @media (max-width: ${MediaQuery.TABLET.max}) {
       padding-inline: ${Paddings.mobile};

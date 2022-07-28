@@ -1,5 +1,7 @@
 import React from 'react';
-import { ProductEndpointToModelAdapter } from 'src/modules/products/adapters/ProductEndpoint.adapter';
+
+import { ProductEndpointToModelAdapter } from 'src/modules/products/adapters/ProductEndpointToModelAdapter.adapter';
+import { ProductRedeemPostSchema } from 'src/modules/products/dto/ProductRedeemPostEndpoint';
 import { ProductsGetEndpoint } from 'src/modules/products/dto/ProductsGetEndpoint';
 import { ProductRedeemEventTrigger } from 'src/modules/products/events/ProductRedeem.event';
 import { Product } from 'src/modules/products/models/Product';
@@ -8,16 +10,11 @@ import { Repository } from 'src/modules/shared/service/Repository';
 import { AEROLAB_API_URL } from 'src/modules/shared/utils/constants';
 import { EnvVariables } from 'src/modules/shared/utils/EnvironmentVariables';
 import { formatBearerToken } from 'src/modules/shared/utils/formatBearerToken';
-import { z } from 'zod';
-
-const ProductRedeemPostSchema = z.object({
-  message: z.string(),
-});
 
 export function useChallengeProductsRepository(): Repository<ProductsRepository> {
   return React.useCallback((signal?: AbortSignal) => {
     return {
-      async findAll() {
+      findAll: async () => {
         const response = await fetch(AEROLAB_API_URL + '/products', {
           method: 'GET',
           signal,

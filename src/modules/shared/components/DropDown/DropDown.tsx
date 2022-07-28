@@ -7,6 +7,7 @@ import { Icon } from 'src/modules/shared/icons/Icon';
 
 const DropDownStyled = styled.div`
   position: relative;
+  z-index: 2;
 
   & > button {
     align-items: center;

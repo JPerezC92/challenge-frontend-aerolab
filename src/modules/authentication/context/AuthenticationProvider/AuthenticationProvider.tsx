@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { PointsAddEventListener } from 'src/modules/points/events/PointsAdd.event';
 import { ProductRedeemEventListener } from 'src/modules/products/events/ProductRedeem.event';
 import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';
 import { User } from 'src/modules/users/models/User';
@@ -59,8 +60,7 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
         if (!user) {
           return dispatch({
             type: AuthenticationActionType.FAILED,
-            payload:
-              'There was an error while attempting to authenticate the user',
+            payload: 'There was an error while attempting to authenticate',
           });
         }
 
@@ -68,7 +68,6 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
           type: AuthenticationActionType.SUCCEEDED,
           payload: user,
         });
-        console.log({ abortController });
       };
 
       handleAuthentication();
@@ -76,8 +75,13 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
       // listening for Events
       const cleanProductRedeemEventListener =
         ProductRedeemEventListener(handleAuthentication);
+      const cleanPointsAddEventListener =
+        PointsAddEventListener(handleAuthentication);
 
-      return () => cleanProductRedeemEventListener();
+      return () => {
+        cleanProductRedeemEventListener();
+        cleanPointsAddEventListener();
+      };
     },
     [usersRepository]
   );

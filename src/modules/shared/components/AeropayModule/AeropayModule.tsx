@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 
+import { PointsAddForm } from 'src/modules/points/containers/PointsAddForm';
 import { AeropayCard } from 'src/modules/shared/components/AeropayCard';
 import { Button } from 'src/modules/shared/components/base/Button';
 import { ButtonUnstyled } from 'src/modules/shared/components/base/Button/Button';
 import { Hr } from 'src/modules/shared/components/base/Hr';
 import { Menu } from 'src/modules/shared/components/base/Menu';
-import { Selector } from 'src/modules/shared/components/base/Selector';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
-import { Aeropay3 } from 'src/modules/shared/icons/Aeropay3';
 import { CrossDefault } from 'src/modules/shared/icons/CrossDefault';
 import { Icon } from 'src/modules/shared/icons/Icon';
+import { useChallengeUsersRepository } from 'src/modules/users/service/useChallengeUsersRepository';
 
 type AeropayModuleProps = {
   className?: string;
@@ -90,25 +90,7 @@ export const AeropayModule: React.FC<AeropayModuleProps> = ({
         <div>
           <AeropayCard />
 
-          <form>
-            <div>
-              <Selector value={1000} label="1000" name="points" />
-              <Selector value={5000} label="5000" name="points" />
-              <Selector
-                value={7500}
-                label="7500"
-                name="points"
-                defaultChecked
-              />
-            </div>
-
-            <Button>
-              <Icon>
-                <Aeropay3 />
-              </Icon>
-              Add Points
-            </Button>
-          </form>
+          <PointsAddForm usersRepository={useChallengeUsersRepository()} />
         </div>
       </li>
     </AeropayModuleStyled>

@@ -1,7 +1,7 @@
 import { Product } from 'src/modules/products/models/Product';
 import { CleanEvent } from 'src/modules/shared/events/CleanEvent';
 
-export const ProductRedeemType = 'product:redeem';
+const ProductRedeemType = 'product:redeem';
 
 export function ProductRedeemEventTrigger(product: Product) {
   const event = new CustomEvent<Product>(ProductRedeemType, {

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { useAuthenticationContext } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 import { PaginationControls } from 'src/modules/products/components/PaginationControls';
 import { ProductsQueryControls } from 'src/modules/products/components/ProductsQueryControls';
 import { SortSelector } from 'src/modules/products/components/SortSelector';
@@ -16,6 +17,7 @@ import {
 } from 'src/modules/products/containers/ProductsGrid/useQueryProducts/ProductsSortReducer';
 import { useQueryProducts } from 'src/modules/products/containers/ProductsGrid/useQueryProducts/useQueryProducts';
 import { Product } from 'src/modules/products/models/Product';
+import { useChallengeProductsRepository } from 'src/modules/products/service/useChallengeProductsRepository';
 import { Select } from 'src/modules/shared/components/base/Select';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { RecolorNeutral } from 'src/modules/shared/components/Recolor/Recolor';
@@ -76,6 +78,8 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
   const { products, pagination, filter, sort, queryDispatch } =
     useQueryProducts();
 
+  const productsRepository = useChallengeProductsRepository();
+  const { user } = useAuthenticationContext();
   React.useEffect(() => {
     if (!!productsDataSource.length) {
       queryDispatch({
@@ -144,7 +148,11 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
         <ProductsGridStyled>
           {products.map((p) => (
             <li key={p.id}>
-              <ProductCard product={p} />
+              <ProductCard
+                product={p}
+                productsRepository={productsRepository}
+                user={user}
+              />
             </li>
           ))}
         </ProductsGridStyled>

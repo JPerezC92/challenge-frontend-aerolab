@@ -1,10 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 import { ColorBrandDefault } from 'src/modules/shared/theming/sharedStyles/colors/Brand';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
-type SelectorProps = { label: string } & Omit<
+type SelectorProps = { label: string | number } & Omit<
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement

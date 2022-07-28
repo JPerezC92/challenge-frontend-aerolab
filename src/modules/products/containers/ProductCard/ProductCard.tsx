@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import React from 'react';
+import { AuthenticationContextState } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 
-import { useAuthenticationContext } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 import { Product } from 'src/modules/products/models/Product';
-import { useChallengeProductsRepository } from 'src/modules/products/service/useChallengeProductsRepository';
+import { ProductsRepository } from 'src/modules/products/service/products.repository';
 import { Button } from 'src/modules/shared/components/base/Button';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { Text2 } from 'src/modules/shared/components/base/Text2';
 import { Aeropay2 } from 'src/modules/shared/icons/Aeropay2';
 import { Aeropay3 } from 'src/modules/shared/icons/Aeropay3';
 import { Icon } from 'src/modules/shared/icons/Icon';
+import { Repository } from 'src/modules/shared/service/Repository';
 import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevation';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
@@ -76,21 +77,22 @@ const ContentStyled = styled.div(({ theme: { Colors } }) => [
 type ProductCardProps = {
   className?: string;
   product: Product;
+  productsRepository: Repository<ProductsRepository>;
+  user: AuthenticationContextState['user'];
 };
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   className,
+  productsRepository,
+  user,
 }) => {
-  const { user } = useAuthenticationContext();
-  const productsRepository = useChallengeProductsRepository();
-
   const [isProcessing, setIsProcessing] = React.useState(false);
   const { category, name, img, cost } = product;
 
   const hasEnoughPoints = user?.hasEnoughPoints(cost);
 
-  const handleRedeemRequest = async () => {
+  const handleRedeemSubmit = async () => {
     setIsProcessing(true);
     await productsRepository().redeem(product);
     setIsProcessing(false);
@@ -144,7 +146,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <Button
         aria-busy={isProcessing}
         disabled={!hasEnoughPoints}
-        onClick={handleRedeemRequest}
+        onClick={handleRedeemSubmit}
       >
         {buttonChildren}
       </Button>
