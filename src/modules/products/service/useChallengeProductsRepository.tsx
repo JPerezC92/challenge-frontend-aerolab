@@ -1,6 +1,9 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { ProductEndpointToModelAdapter } from 'src/modules/products/adapters/ProductEndpointToModelAdapter.adapter';
+import { ProductRedeemFailureToast } from 'src/modules/products/components/ProductRedeemFailureToast';
+import { ProductRedeemSuccessToast } from 'src/modules/products/components/ProductRedeemSuccessToast';
 import { ProductRedeemPostSchema } from 'src/modules/products/dto/ProductRedeemPostEndpoint';
 import { ProductsGetEndpoint } from 'src/modules/products/dto/ProductsGetEndpoint';
 import { ProductRedeemEventTrigger } from 'src/modules/products/events/ProductRedeem.event';
@@ -54,14 +57,13 @@ export function useChallengeProductsRepository(): Repository<ProductsRepository>
         const validation = ProductRedeemPostSchema.safeParse(result);
 
         if (!validation.success) {
-          console.log(
-            'Error when attempting to redeem product ' + product,
-            validation.error
-          );
+          toast(<ProductRedeemFailureToast />);
+
           return;
         }
 
         ProductRedeemEventTrigger(product);
+        toast(<ProductRedeemSuccessToast product={product} />);
       },
     };
   }, []);

@@ -28,8 +28,6 @@ const HeaderStyled = styled.header({
   alignItems: 'center',
 });
 
-const CloseButtonStyled = styled.button([ButtonUnstyled]);
-
 const ContentStyled = styled.div({
   paddingInline: '1.5rem',
   paddingBlock: '1rem',
@@ -44,11 +42,11 @@ export const AeropayModule: React.FC<AeropayModuleProps> = ({ onClose }) => {
         <HeaderStyled>
           <Text1 as="h3">Add Balance</Text1>
 
-          <CloseButtonStyled type="button" onClick={onClose}>
+          <ButtonUnstyled type="button" onClick={onClose}>
             <Icon size="sm">
               <CrossDefault />
             </Icon>
-          </CloseButtonStyled>
+          </ButtonUnstyled>
         </HeaderStyled>
 
         <Hr />

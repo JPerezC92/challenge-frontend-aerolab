@@ -10,26 +10,15 @@ import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevat
 import { SharedStyles } from 'src/modules/shared/theming/sharedStyles/SharedStyles';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
-const enum ButtonVariant {
-  UNSTYLED = 'unstyled',
-}
-
-type ButtonProps = {
-  variant?: `${ButtonVariant}`;
-};
-
-export const ButtonUnstyled = css`
-  color: initial;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  line-height: 0;
-
-  &:hover {
-    background: transparent;
-  }
-`;
+export const ButtonUnstyled = styled.button([
+  {
+    background: 'transparent',
+    border: 'none',
+    padding: '0',
+    margin: '0',
+    lineHeight: '0',
+  },
+]);
 
 const Busy: SharedStyles = ({ theme: { Colors } }) =>
   css({

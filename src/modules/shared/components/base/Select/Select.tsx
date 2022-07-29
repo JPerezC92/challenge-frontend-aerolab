@@ -6,8 +6,7 @@ import { useOnClickOutside } from 'src/modules/shared/hooks/useOnClickOutside';
 import { ColorNeutral600 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
-const CustomSelect = styled.button(({ theme: { Colors } }) => [
-  ButtonUnstyled,
+const CustomSelect = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
   TextL1Default,
   {
     color: Colors.neutral[600],
@@ -55,8 +54,7 @@ const CustomSelectMenu = styled.menu(({ theme: { Colors } }) => [
   },
 ]);
 
-const CustomSelectOption = styled.button(({ theme: { Colors } }) => [
-  ButtonUnstyled,
+const CustomSelectOption = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
   TextL1Default,
   ColorNeutral600,
   {

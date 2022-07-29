@@ -9,8 +9,7 @@ import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevat
 
 const DropDownStyled = styled.div({ position: 'relative' });
 
-const ButtonStyled = styled.button(({ theme: { Colors } }) => [
-  ButtonUnstyled,
+const ButtonStyled = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
   ElevationDefault,
   {
     display: 'flex',

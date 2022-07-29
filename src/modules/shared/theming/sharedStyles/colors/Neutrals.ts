@@ -10,3 +10,8 @@ export const ColorNeutral100: SharedStyles = ({ theme: { Colors } }) =>
   css({
     color: Colors.neutral[100],
   });
+
+export const ColorNeutral900: SharedStyles = ({ theme: { Colors } }) =>
+  css({
+    color: Colors.neutral[900],
+  });

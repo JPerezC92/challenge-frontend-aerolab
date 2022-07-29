@@ -1,7 +1,7 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { ColorBrandDefault } from 'src/modules/shared/theming/sharedStyles/colors/Brand';
+import { ColorNeutral900 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
 import * as TextL1 from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
 const enum Text1Variant {
@@ -19,6 +19,10 @@ const Text1Default = styled.p<Text1Props>`
   ${TextL1.TextL1Default}
 
   ${({ brand }) => brand && ColorBrandDefault}
+
+  & > b {
+    ${ColorNeutral900}
+  }
 `;
 
 const Text1AllCaps = styled(Text1Default)`
