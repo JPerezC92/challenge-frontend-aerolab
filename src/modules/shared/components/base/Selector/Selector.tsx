@@ -36,7 +36,7 @@ const SelectorStyled = styled.input`
 
   &:checked ~ label {
     color: ${({ theme: { Colors } }) => Colors.neutral[100]};
-    background-clip: border-box;
+    background-clip: initial;
   }
 `;
 

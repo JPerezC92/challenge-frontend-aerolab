@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import { PointsAmount } from 'src/modules/points/models/PointsAmount';
 import { Button } from 'src/modules/shared/components/base/Button';
@@ -6,6 +7,18 @@ import { Aeropay3 } from 'src/modules/shared/icons/Aeropay3';
 import { Icon } from 'src/modules/shared/icons/Icon';
 import { Repository } from 'src/modules/shared/service/Repository';
 import { UsersRepository } from 'src/modules/users/service/users.repository';
+
+const PointsAddFormStyled = styled.form({
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '1.5rem',
+});
+
+const SelectorsGroupStyled = styled.div({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, auto)',
+  columnGap: '0.25rem',
+});
 
 type PointsAddFormProps = {
   className?: string;
@@ -40,8 +53,8 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleAddPointsSubmit} className={className}>
-      <div>
+    <PointsAddFormStyled onSubmit={handleAddPointsSubmit} className={className}>
+      <SelectorsGroupStyled>
         {selectPoints.map((value) => (
           <Selector
             key={value}
@@ -52,7 +65,7 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
             onChange={handleOnChange}
           />
         ))}
-      </div>
+      </SelectorsGroupStyled>
 
       <Button type="submit" disabled={isLoading}>
         <Icon>
@@ -60,6 +73,6 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
         </Icon>
         Add Points
       </Button>
-    </form>
+    </PointsAddFormStyled>
   );
 };

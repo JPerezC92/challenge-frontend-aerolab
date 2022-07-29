@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
 
@@ -12,20 +11,18 @@ import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 
-const NavBarStyled = styled.header`
-  ${DesktopMaxWidth}
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 40px;
-
-  ${({ theme: { Paddings } }) => css`
-    @media (max-width: ${MediaQuery.TABLET.max}) {
-      padding-inline: ${Paddings.mobile};
-    }
-  `}
-`;
+const NavBarStyled = styled.header(({ theme: { Paddings } }) => [
+  DesktopMaxWidth,
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBlock: '2.5rem',
+    [`@media (max-width: ${MediaQuery.TABLET.max})`]: {
+      paddingInline: Paddings.mobile,
+    },
+  },
+]);
 
 export const NavBar: React.FC = () => {
   const { user } = useAuthenticationContext();

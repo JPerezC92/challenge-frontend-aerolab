@@ -2,10 +2,8 @@ import styled from '@emotion/styled';
 
 import { PointsAddForm } from 'src/modules/points/containers/PointsAddForm';
 import { AeropayCard } from 'src/modules/shared/components/AeropayCard';
-import { Button } from 'src/modules/shared/components/base/Button';
 import { ButtonUnstyled } from 'src/modules/shared/components/base/Button/Button';
 import { Hr } from 'src/modules/shared/components/base/Hr';
-import { Menu } from 'src/modules/shared/components/base/Menu';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { CrossDefault } from 'src/modules/shared/icons/CrossDefault';
 import { Icon } from 'src/modules/shared/icons/Icon';
@@ -13,86 +11,54 @@ import { useChallengeUsersRepository } from 'src/modules/users/service/useChalle
 
 type AeropayModuleProps = {
   className?: string;
-  isOpen: boolean;
   onClose?: () => void;
 };
 
-export const AeropayModuleStyled = styled(Menu)`
-  border-radius: 1rem;
-  border: 1px solid ${({ theme: { Colors } }) => Colors.neutral[300]};
-  position: absolute;
-  right: 0;
-  top: 120%;
+const MenuItemStyled = styled.li({
+  display: 'flex',
+  flexDirection: 'column',
+});
 
-  & > li {
-    display: flex;
-    flex-direction: column;
+const HeaderStyled = styled.header({
+  marginInline: '1.5rem',
+  marginBlock: '1rem',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+});
 
-    & > header {
-      margin-inline: 1.5rem;
-      margin-block: 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+const CloseButtonStyled = styled.button([ButtonUnstyled]);
 
-      & > button {
-        ${ButtonUnstyled}
-      }
-    }
+const ContentStyled = styled.div({
+  paddingInline: '1.5rem',
+  paddingBlock: '1rem',
+  display: 'grid',
+  rowGap: '2.5rem',
+});
 
-    & > div:nth-of-type(1) {
-      padding-inline: 1.5rem;
-      padding-block: 1rem;
-
-      display: grid;
-      grid-template-rows: repeat(2, auto);
-      row-gap: 2.5rem;
-
-      & > ol {
-        display: flex;
-        column-gap: 2.5rem;
-      }
-    }
-  }
-
-  & form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.5rem;
-    div {
-      display: grid;
-      grid-template-columns: repeat(3, auto);
-      column-gap: 0.25rem;
-    }
-  }
-`;
-
-export const AeropayModule: React.FC<AeropayModuleProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const AeropayModule: React.FC<AeropayModuleProps> = ({ onClose }) => {
   return (
-    <AeropayModuleStyled isOpen={isOpen}>
-      <li>
-        <header>
+    <menu>
+      <MenuItemStyled>
+        <HeaderStyled>
           <Text1 as="h3">Add Balance</Text1>
 
-          <Button type="button" onClick={onClose}>
+          <CloseButtonStyled type="button" onClick={onClose}>
             <Icon size="sm">
               <CrossDefault />
             </Icon>
-          </Button>
-        </header>
+          </CloseButtonStyled>
+        </HeaderStyled>
 
         <Hr />
 
-        <div>
+        <ContentStyled>
           <AeropayCard />
 
           <PointsAddForm usersRepository={useChallengeUsersRepository()} />
-        </div>
-      </li>
-    </AeropayModuleStyled>
+        </ContentStyled>
+      </MenuItemStyled>
+    </menu>
   );
 };

@@ -1,63 +1,84 @@
-import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import React from 'react';
 
+import { ButtonUnstyled } from 'src/modules/shared/components/base/Button/Button';
 import { ChevronDown } from 'src/modules/shared/icons/ChevronDown';
 import { Icon } from 'src/modules/shared/icons/Icon';
+import { BackgroundNeutral0 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
+import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevation';
 
-const DropDownStyled = styled.div`
-  position: relative;
-  z-index: 2;
+const DropDownStyled = styled.div({ position: 'relative' });
 
-  & > button {
-    align-items: center;
-    border-radius: 1rem;
-    column-gap: 1rem;
-    display: flex;
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+const ButtonStyled = styled.button(({ theme: { Colors } }) => [
+  ButtonUnstyled,
+  ElevationDefault,
+  {
+    display: 'flex',
+    borderRadius: '1rem',
+    border: `1px solid ${Colors.neutral[300]}`,
+    backgroundColor: Colors.neutral[0],
+    paddingInline: '1rem',
+    paddingBlock: '0.5rem',
+    columnGap: '1rem',
+    alignItems: 'center',
+  },
+]);
 
-    ${({ theme: { Colors } }) => css`
-      border: 1px solid ${Colors.neutral[300]};
-      background-color: ${Colors.neutral[0]};
-    `}
+const SpanStyled = styled.span({
+  display: 'flex',
+  flexWrap: 'nowrap',
+  alignItems: 'center',
+  columnGap: '0.5rem',
+});
 
-    & > span {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      column-gap: 0.5rem;
-    }
-  }
-`;
+const MenuWrapperStyled = styled.div(({ theme: { Colors } }) => [
+  BackgroundNeutral0,
+  ElevationDefault,
+  {
+    overflow: 'hidden',
+    borderRadius: '1rem',
+    border: `1px solid ${Colors.neutral[300]}`,
+    position: 'absolute',
+    right: '0',
+    top: '120%',
+    zIndex: '2',
+
+    ['&[aria-hidden=true]']: {
+      visibility: 'hidden',
+      height: '0',
+      width: '0',
+    },
+  },
+]);
 
 type DropDownProps = {
   children?: React.ReactNode;
   icon?: React.ReactElement;
   openIcon?: React.ReactElement;
   closeIcon?: React.ReactElement;
-  Menu: React.FC<{ isOpen: boolean; onClose?: () => void }>;
+  Menu: React.FC<{ onClose?: () => void }>;
 };
 
 export const DropDown: React.FC<DropDownProps> = ({ Menu, icon, children }) => {
-  const [toogle, setToogle] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
 
-  const handleToggle = () => setToogle((s) => !s);
+  const handleToggle = () => setToggle((s) => !s);
 
   return (
     <DropDownStyled>
-      <button onClick={handleToggle}>
-        <span>
+      <ButtonStyled onClick={handleToggle}>
+        <SpanStyled>
           {icon} {children}
-        </span>
+        </SpanStyled>
 
         <Icon size="md">
-          <ChevronDown open={toogle} />
+          <ChevronDown open={toggle} />
         </Icon>
-      </button>
+      </ButtonStyled>
 
-      <Menu isOpen={toogle} onClose={handleToggle} />
+      <MenuWrapperStyled aria-hidden={!toggle}>
+        <Menu onClose={handleToggle} />
+      </MenuWrapperStyled>
     </DropDownStyled>
   );
 };
