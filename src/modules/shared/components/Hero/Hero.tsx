@@ -8,164 +8,103 @@ import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { ArrowDown } from 'src/modules/shared/icons/ArrowDown';
 import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
-import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 
-const HeroStyled = styled.section`
-  position: relative;
-  background: url('/illustrations/single-wave-pattern.svg') 0 0.8rem,
-    url('/illustrations/single-wave-pattern.svg');
+const HeroStyled = styled.section([
+  {
+    marginBlockStart: '2.5rem',
 
-  & > div {
-    ${DesktopMaxWidth}
-    padding-top: 7rem;
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    column-gap: 2.5rem;
-  }
+    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+      marginBlock: '7rem',
+      display: 'flex',
+    },
+  },
+]);
 
-  @media (max-width: ${MediaQuery.TABLET.max}) {
-    margin-top: 2.5rem;
-    & > div {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
+const ContainerStyled = styled.div(({ theme: { Grid } }) => [
+  {
+    position: 'relative',
+    [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+      maxWidth: Grid.maxWidth,
+      margin: 'auto',
+    },
+  },
+]);
 
-const HeroButton = styled(ButtonDefault)`
-  padding-inline: 2.5rem;
-  padding-block: 1.6rem;
-  padding-block: 1.25rem;
-  white-space: nowrap;
-  max-width: max-content;
-`;
+const HeroButton = styled(ButtonDefault)([
+  {
+    whiteSpace: 'nowrap',
+    marginBlockStart: '2.5rem',
+    [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+      marginBlockStart: '4rem',
+      marginInline: 'auto',
+    },
 
-const HeroContentStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: min-content;
+    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+      marginInline: '0',
+    },
+  },
+]);
 
-  & > p:nth-of-type(1) {
-    margin-bottom: 0.5rem;
-  }
+const HeroContentStyled = styled.div(({ theme: { Colors } }) => [
+  {
+    width: 'min-content',
+    marginBottom: '1.125rem',
+    display: 'inline-block',
 
-  & > p:nth-of-type(2) {
-    margin-block: 1.5rem 2.5rem;
-  }
+    ['& >' + `${Text1}`]: {
+      color: Colors.neutral[600],
+      marginBlockEnd: '.5rem',
+      marginBlockStart: '1.5rem',
+    },
 
-  & > button {
-    margin-block-end: 1rem;
-  }
+    [`@media (max-width: ${MediaQuery.DESKTOP.max})`]: {
+      display: 'block',
+      margin: 'auto',
+      textAlign: 'center',
+    },
+  },
+]);
 
-  @media (max-width: ${MediaQuery.TABLET.max}) {
-    margin-inline: 1.25rem;
-    justify-self: center;
-    padding-inline: 1rem;
-    text-align: center;
-  }
-`;
+const HeroPictureStyled = styled.picture(({ theme: { Colors } }) => [
+  {
+    lineHeight: '0',
 
-const HeroPictureStyled = styled.picture`
-  display: flex;
-  flex-direction: column;
+    [`@media (max-width: ${MediaQuery.DESKTOP.max})`]: {
+      display: 'table',
+      margin: 'auto',
 
-  & > span {
-    height: 100% !important;
-    overflow: visible !important;
+      ['& *']: {
+        height: '580px !important',
+      },
+    },
 
-    & > span {
-      height: 100% !important;
-      position: relative;
-    }
-  }
+    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+      width: '722px',
+      height: '600px',
+      marginLeft: 'auto',
+      transform: 'translateY(-7.5rem)',
 
-  @media (min-width: ${MediaQuery.MOBILE.min}) {
-    max-height: 100%;
+      ['& img']: {
+        transform: 'translateY(-2.6rem) scale(1.25)',
+      },
 
-    & > span {
-      & > span {
-        overflow: hidden !important;
-        ::after {
-          position: absolute;
-          content: '';
-          width: 100%;
-          height: 100%;
-          top: 6.5rem;
-
-          background: ${({ theme: { Colors } }) =>
-            Colors.specials.bg.illustration} !important;
-          mix-blend-mode: multiply;
-        }
-      }
-    }
-
-    & img {
-      min-height: 518px !important;
-    }
-  }
-  @media (min-width: ${MediaQuery.TABLET.min}) {
-    & > span {
-      height: 518px !important;
-      & > span {
-        ::after {
-          top: 20rem;
-        }
-      }
-    }
-    & img {
-      margin-block: 0 !important;
-      min-height: min(100%, 518px) !important;
-      min-width: min(100%, 580px) !important;
-    }
-  }
-
-  @media (min-width: ${MediaQuery.DESKTOP.min}) {
-    margin-top: 7rem !important;
-    overflow: visible;
-
-    & > span {
-      height: 100% !important;
-      & > span {
-        margin-inline: 3.5rem !important;
-        margin-top: auto !important;
-        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
-        border-radius: 2.5rem;
-        overflow: hidden;
-
-        ::after {
-          top: 0;
-        }
-      }
-    }
-
-    & img {
-      position: absolute;
-      left: 0 !important;
-      bottom: 0 !important;
-      top: unset !important;
-      height: 150% !important;
-      min-width: 100% !important;
-      max-height: max-content !important;
-      min-height: max-content !important;
-    }
-  }
-
-  @media (min-width: ${MediaQuery.DESKTOP.max}) {
-    margin-top: initial !important;
-    display: flex;
-    & > span {
-      & > span {
-        margin-inline: auto 0 !important;
-        border-radius: 6.5rem;
-        max-width: 85% !important;
-      }
-    }
-
-    & img {
-      object-position: 3.5rem;
-      height: 135% !important;
-    }
-  }
-`;
+      ['&::after']: {
+        background: Colors.specials.bg.illustration,
+        borderRadius: '6.5rem',
+        boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.12)',
+        content: '""',
+        height: '100%',
+        left: '-10rem',
+        margin: '10rem',
+        position: 'absolute',
+        top: '0',
+        transform: 'translateY(-2.4rem)',
+        width: '100%',
+        zIndex: '-1',
+      },
+    },
+  },
+]);
 
 type HeroProps = {
   className?: string;
@@ -173,10 +112,11 @@ type HeroProps = {
 
 export const Hero: React.FC<HeroProps> = ({ className }) => {
   return (
-    <HeroStyled className={className}>
-      <div>
+    <ContainerStyled>
+      <HeroStyled className={className}>
         <HeroContentStyled>
           <Text1 variant="allCaps">Explore the</Text1>
+
           <Heading1>
             <em>TECH</em> zone
           </Heading1>
@@ -203,7 +143,7 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
             objectFit="cover"
           />
         </HeroPictureStyled>
-      </div>
-    </HeroStyled>
+      </HeroStyled>
+    </ContainerStyled>
   );
 };

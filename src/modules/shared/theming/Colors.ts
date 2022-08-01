@@ -38,7 +38,7 @@ export const Colors = {
   },
   specials: {
     bg: {
-      illustration: `linear-gradient(102.47deg, ${SpecialColors.cornflowerBlue}, ${SpecialColors.electricLavender}, ${SpecialColors.electricLavender})`,
+      illustration: `linear-gradient(102.47deg, ${SpecialColors.cornflowerBlue} -5.34%, ${SpecialColors.electricLavender} 106.58%, ${SpecialColors.electricLavender} 106.58%)`,
       section: `linear-gradient(102.47deg, ${SpecialColors.blueDress}, ${SpecialColors.fuchsiaPink})`,
     },
   },

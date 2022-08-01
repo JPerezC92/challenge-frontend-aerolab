@@ -6,6 +6,7 @@ import { ProductsSection } from 'src/modules/products/containers/ProductsSection
 import { Container } from 'src/modules/shared/components/Container';
 import { Hero } from 'src/modules/shared/components/Hero';
 import { NavBar } from 'src/modules/shared/components/NavBar';
+import { Walkthrough } from 'src/modules/shared/components/Walkthrough';
 
 const Home: NextPage = () => {
   return (
@@ -20,6 +21,8 @@ const Home: NextPage = () => {
         <NavBar />
 
         <Hero />
+
+        <Walkthrough />
 
         <Container>
           <ProductsSection />
