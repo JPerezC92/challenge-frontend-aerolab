@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { productsSectionId } from 'src/modules/products/containers/ProductsSection/ProductsSection';
 
+import { productsSectionId } from 'src/modules/products/containers/ProductsSection/ProductsSection';
 import { ButtonDefault } from 'src/modules/shared/components/base/Button/Button';
 import { Heading1 } from 'src/modules/shared/components/base/Heading1';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
@@ -11,13 +11,36 @@ import { ArrowDown } from 'src/modules/shared/icons/ArrowDown';
 import { Icon } from 'src/modules/shared/icons/Icon';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 
-const HeroStyled = styled.section([
+const WavesStyled = styled.div([
   {
-    marginBlockStart: '2.5rem',
+    position: 'relative',
+    ['&::before']: {
+      position: 'absolute',
+      content: '""',
+      width: '100%',
+      height: '100%',
+      background: 'url(/illustrations/single-wave-pattern.svg)',
+      zIndex: '-1',
+      top: '0',
+      left: '0',
+      backgroundPosition: 'top center',
 
-    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
-      marginBlock: '7rem',
-      display: 'flex',
+      [`@media (max-width: ${MediaQuery.MOBILE.max})`]: {
+        backgroundSize: 'auto 1rem',
+        height: '55%',
+        top: '-1.5rem',
+      },
+
+      [`@media (max-width: ${MediaQuery.TABLET.max})`]: {
+        backgroundSize: 'auto 1.5rem',
+        height: '108%',
+        top: '-2.8rem',
+      },
+      [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+        backgroundSize: 'auto 1.5rem',
+        height: '211%',
+        top: '-2.8rem',
+      },
     },
   },
 ]);
@@ -28,6 +51,17 @@ const ContainerStyled = styled.div(({ theme: { Grid } }) => [
     [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
       maxWidth: Grid.maxWidth,
       margin: 'auto',
+    },
+  },
+]);
+
+const HeroStyled = styled.section([
+  {
+    marginBlockStart: '2.5rem',
+
+    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+      marginBlock: '7rem',
+      display: 'flex',
     },
   },
 ]);
@@ -95,8 +129,8 @@ const HeroPictureStyled = styled.picture(({ theme: { Colors } }) => [
         transform: 'translateY(-2.6rem) scale(1.25)',
       },
 
-      ['&::after']: {
-        background: Colors.specials.bg.illustration,
+      ['&::before']: {
+        background: Colors.specials.bg.section,
         borderRadius: '6.5rem',
         boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.12)',
         content: '""',
@@ -107,6 +141,7 @@ const HeroPictureStyled = styled.picture(({ theme: { Colors } }) => [
         top: '0',
         transform: 'translateY(-2.4rem)',
         width: '100%',
+        opacity: '.5',
         zIndex: '-1',
       },
     },
@@ -119,40 +154,42 @@ type HeroProps = {
 
 export const Hero: React.FC<HeroProps> = ({ className }) => {
   return (
-    <ContainerStyled>
-      <HeroStyled className={className}>
-        <HeroContentStyled>
-          <Text1 variant="allCaps">Explore the</Text1>
+    <WavesStyled>
+      <ContainerStyled>
+        <HeroStyled className={className}>
+          <HeroContentStyled>
+            <Text1 variant="allCaps">Explore the</Text1>
 
-          <Heading1>
-            <em>TECH</em> zone
-          </Heading1>
+            <Heading1>
+              <em>TECH</em> zone
+            </Heading1>
 
-          <Text1>
-            Here you’ll be able to redeem all of your hard-earned Aeropoints and
-            exchange them for cool tech.
-          </Text1>
+            <Text1>
+              Here you’ll be able to redeem all of your hard-earned Aeropoints
+              and exchange them for cool tech.
+            </Text1>
 
-          <Link href={`#${productsSectionId}`}>
-            <HeroButtonStyled>
-              VIEW ALL PRODUCTS
-              <Icon>
-                <ArrowDown />
-              </Icon>
-            </HeroButtonStyled>
-          </Link>
-        </HeroContentStyled>
+            <Link href={`#${productsSectionId}`}>
+              <HeroButtonStyled>
+                VIEW ALL PRODUCTS
+                <Icon>
+                  <ArrowDown />
+                </Icon>
+              </HeroButtonStyled>
+            </Link>
+          </HeroContentStyled>
 
-        <HeroPictureStyled>
-          <Image
-            src="/illustrations/hero-desktop.png"
-            width="1080"
-            height="1080"
-            alt="hero illustration"
-            objectFit="cover"
-          />
-        </HeroPictureStyled>
-      </HeroStyled>
-    </ContainerStyled>
+          <HeroPictureStyled>
+            <Image
+              src="/illustrations/hero-desktop.png"
+              width="1080"
+              height="1080"
+              alt="hero illustration"
+              objectFit="cover"
+            />
+          </HeroPictureStyled>
+        </HeroStyled>
+      </ContainerStyled>
+    </WavesStyled>
   );
 };

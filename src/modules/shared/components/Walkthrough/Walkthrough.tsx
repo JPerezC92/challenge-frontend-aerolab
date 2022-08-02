@@ -14,19 +14,14 @@ import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 export const WalkthroughStyled = styled.section(({ theme: { Colors } }) => [
   {
     position: 'relative',
-
-    [`@media (min-width: ${MediaQuery.TABLET.min}) and (max-width: ${MediaQuery.TABLET.max})`]:
-      {
-        marginBlockEnd: '-3.5rem',
-      },
-
     ['&::before']: {
-      background: Colors.specials.bg.illustration,
+      background: Colors.specials.bg.section,
       position: 'absolute',
       content: '""',
       left: 0,
       width: '100%',
       zIndex: '-1',
+      opacity: '0.5',
       [`@media (max-width: ${MediaQuery.MOBILE.max})`]: {
         top: '-28.5rem',
         height: 'calc(100% + 28.5rem)',
@@ -39,11 +34,12 @@ export const WalkthroughStyled = styled.section(({ theme: { Colors } }) => [
         },
 
       [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
-        top: '4.5rem',
-
-        height: '31.5rem',
+        top: '5.5rem',
+        height: '34rem',
       },
     },
+    [`@media (min-width: ${MediaQuery.TABLET.min}) and (max-width: ${MediaQuery.TABLET.max})`]:
+      { marginBlockEnd: '-3.5rem' },
   },
 ]);
 
@@ -52,35 +48,42 @@ const ContainerStyled = styled(Container)({
   rowGap: '1.5rem',
   columnGap: '.5rem',
   justifyItems: 'center',
-
   [`@media (max-width: ${MediaQuery.MOBILE.max})`]: {
     transform: 'translateY(-2rem)',
   },
-
   [`@media  (min-width: ${MediaQuery.TABLET.min}) and (max-width: ${MediaQuery.TABLET.max})`]:
     {
       transform: 'translateY(-5.2rem)',
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'center',
+      ['& > *']: { maxWidth: '17rem' },
     },
-
-  [`@media (min-width: ${MediaQuery.TABLET.max})`]: {
-    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%,317px) ,1fr))',
-  },
-
   [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%,20rem) ,1fr))',
     gap: '0',
     ['& ' + `article:first-of-type`]: {
-      transform: 'rotate(-3deg) translateX(1rem)',
+      transform: 'rotate(-3deg) translateX(2rem) translateY(2rem) scale(1.01)',
+    },
+    ['& ' + `article:nth-of-type(2)`]: {
+      transform: 'translateZ(1px) scale(1.02)',
+    },
+    ['& ' + `article:last-of-type`]: {
+      transform: 'rotate(3deg) translateX(-2rem) translateY(2rem) scale(1.01)',
+    },
+  },
+  [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+    gap: '0',
+    ['& ' + `article:first-of-type`]: {
+      transform: 'rotate(-3deg) translateX(4rem) translateY(2rem) scale(1.02)',
     },
 
     ['& ' + `article:nth-of-type(2)`]: {
-      transform: 'translateY(-2.75rem)',
+      transform: 'translateZ(1px) scale(1.02)',
     },
 
     ['& ' + `article:last-of-type`]: {
-      transform: 'rotate(3deg) translateX(-1rem)',
+      transform: 'rotate(3deg) translateX(-4rem) translateY(2rem) scale(1.02)',
     },
   },
 });
