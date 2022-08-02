@@ -22,11 +22,11 @@ const ToastBaseStyled = styled.div([
     borderStyle: 'solid',
     overflow: 'hidden',
     columnGap: '0.75rem',
-    maxWidth: '30rem',
+    maxWidth: '33.25rem',
     alignItems: 'center',
 
     [`@media (max-width: ${MediaQuery.TABLET.max})`]: {
-      maxWidth: '19.25rem',
+      maxWidth: '22.5rem',
       ['& >' + `${ButtonUnstyled}, ${Icon}`]: {
         alignSelf: 'flex-start',
       },

@@ -16,7 +16,7 @@ export const ProductRedeemSuccessToast: React.FC<ProductRedeemToastProps> = ({
   return (
     <SuccessToast {...props}>
       <Text1>
-        <b>{product.name}</b> <br /> redeemed successfully
+        <b>{product.name}</b> redeemed successfully
       </Text1>
     </SuccessToast>
   );
