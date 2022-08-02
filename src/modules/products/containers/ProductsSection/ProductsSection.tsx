@@ -8,14 +8,28 @@ import { ProductsGrid } from 'src/modules/products/containers/ProductsGrid';
 import { Product } from 'src/modules/products/models/Product';
 import { useChallengeProductsRepository } from 'src/modules/products/service/useChallengeProductsRepository';
 import { Heading2 } from 'src/modules/shared/components/base/Heading2';
+import { Container } from 'src/modules/shared/components/Container';
 import { RecolorNeutral } from 'src/modules/shared/components/Recolor';
 import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
+import { BackgroundNeutral0 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
+
+const ProductsSectionWrapperStyled = styled(Container)([
+  BackgroundNeutral0,
+  {
+    paddingBlockStart: '10rem',
+
+    [`@media (max-width: ${MediaQuery.TABLET.max})`]: {
+      paddingBlockStart: '5rem',
+    },
+  },
+]);
 
 const ProductHeaderStyled = styled.div({
   marginBlockEnd: '2.5rem',
 });
 
-const productsSectionId = 'products-section';
+export const productsSectionId = 'products-section';
 
 export const ProductsSection: React.FC = () => {
   const router = useRouter();
@@ -41,23 +55,25 @@ export const ProductsSection: React.FC = () => {
   );
 
   return (
-    <section id={productsSectionId}>
-      <ProductHeaderStyled>
-        <Heading2>
-          Tech <RecolorNeutral shade={900}>products</RecolorNeutral>
-        </Heading2>
-      </ProductHeaderStyled>
+    <ProductsSectionWrapperStyled>
+      <section id={productsSectionId}>
+        <ProductHeaderStyled>
+          <Heading2>
+            Tech <RecolorNeutral shade={900}>products</RecolorNeutral>
+          </Heading2>
+        </ProductHeaderStyled>
 
-      <ProductsGrid
-        onChangePage={handleChangePage}
-        productsDataSource={products}
-        skeleton={
-          <ProductsGridSkeleton
-            component={<ProductCardSkeleton />}
-            itemsQuantity={12}
-          ></ProductsGridSkeleton>
-        }
-      />
-    </section>
+        <ProductsGrid
+          onChangePage={handleChangePage}
+          productsDataSource={products}
+          skeleton={
+            <ProductsGridSkeleton
+              component={<ProductCardSkeleton />}
+              itemsQuantity={12}
+            ></ProductsGridSkeleton>
+          }
+        />
+      </section>
+    </ProductsSectionWrapperStyled>
   );
 };

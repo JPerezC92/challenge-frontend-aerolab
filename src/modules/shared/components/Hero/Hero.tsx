@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import { productsSectionId } from 'src/modules/products/containers/ProductsSection/ProductsSection';
 
 import { ButtonDefault } from 'src/modules/shared/components/base/Button/Button';
 import { Heading1 } from 'src/modules/shared/components/base/Heading1';
@@ -30,20 +32,25 @@ const ContainerStyled = styled.div(({ theme: { Grid } }) => [
   },
 ]);
 
-const HeroButton = styled(ButtonDefault)([
-  {
-    whiteSpace: 'nowrap',
-    marginBlockStart: '2.5rem',
-    [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
-      marginBlockStart: '4rem',
-      marginInline: 'auto',
-    },
+const HeroButtonStyled = styled
+  .a([
+    {
+      width: 'max-content',
+      paddingBlock: '1.25rem',
+      whiteSpace: 'nowrap',
+      marginBlockStart: '2.5rem',
 
-    [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
-      marginInline: '0',
+      [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+        paddingBlock: '1.5rem',
+        marginBlockStart: '4rem',
+        marginInline: 'auto',
+      },
+      [`@media (min-width: ${MediaQuery.DESKTOP.max})`]: {
+        marginInline: '0',
+      },
     },
-  },
-]);
+  ])
+  .withComponent(ButtonDefault);
 
 const HeroContentStyled = styled.div(({ theme: { Colors } }) => [
   {
@@ -126,12 +133,14 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
             exchange them for cool tech.
           </Text1>
 
-          <HeroButton>
-            VIEW ALL PRODUCTS
-            <Icon>
-              <ArrowDown />
-            </Icon>
-          </HeroButton>
+          <Link href={`#${productsSectionId}`}>
+            <HeroButtonStyled>
+              VIEW ALL PRODUCTS
+              <Icon>
+                <ArrowDown />
+              </Icon>
+            </HeroButtonStyled>
+          </Link>
         </HeroContentStyled>
 
         <HeroPictureStyled>

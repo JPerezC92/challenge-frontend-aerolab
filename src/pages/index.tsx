@@ -24,9 +24,7 @@ const Home: NextPage = () => {
 
         <Walkthrough />
 
-        <Container>
-          <ProductsSection />
-        </Container>
+        <ProductsSection />
       </div>
     </AuthenticationProvider>
   );

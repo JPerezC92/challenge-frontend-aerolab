@@ -1,65 +1,70 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
 import { Heading3 } from 'src/modules/shared/components/base/Heading3';
-import { BackgroundSpecialIllustration } from 'src/modules/shared/theming/sharedStyles/backgrounds/BackgroundBrandDefault';
+import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
+import { BackgroundNeutral0 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
+import { ColorNeutral600 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
 
-const WalkthroughCardStyled = styled.article`
-  ${({ theme: { Colors } }) => css`
-    padding: 0.75rem;
-    border: 1px solid ${Colors.neutral[300]};
-  `}
-  line-height: 0;
-  box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 2rem;
+const WalkthroughCardWrapperStyled = styled.article(({ theme: { Colors } }) => [
+  {
+    padding: '.75rem',
+    background: 'rgba(255, 255, 255, 0.7)',
+    borderRadius: '2rem',
+    border: `1px solid ${Colors.neutral[300]}`,
+    [`@media  (min-width: ${MediaQuery.TABLET.min}) and (max-width: ${MediaQuery.TABLET.max})`]:
+      { width: 'min(100%,25rem)' },
+  },
+]);
 
-  & > picture {
-    & > span {
-      ${({ theme: { Colors } }) => css`
-        border-top: 1px solid ${Colors.neutral[300]} !important;
-        border-left: 1px solid ${Colors.neutral[300]} !important;
-        border-right: 1px solid ${Colors.neutral[300]} !important;
-        border-top-left-radius: 1.5rem;
-        border-top-right-radius: 1.5rem;
-      `}
-    }
+const WalkthroughCardStyled = styled.div(({ theme: { Colors } }) => [
+  BackgroundNeutral0,
+  {
+    display: 'flex',
+    flexWrap: 'wrap',
+    height: '100%',
+    borderRadius: '1.5rem',
+    overflow: 'hidden',
+    border: `1px solid ${Colors.neutral[300]}`,
+  },
+]);
 
-    & img {
-      ${BackgroundSpecialIllustration}
-    }
-  }
-`;
+const CardPictureStyled = styled.picture(({ theme: { Colors } }) => [
+  {
+    display: 'grid',
+    width: '100%',
 
-const WalkthroughCardContent = styled.article`
-  ${({ theme: { Colors } }) =>
-    css`
-      background: ${Colors.neutral[0]};
-      border-top: 1px solid ${Colors.neutral[300]};
-    `}
-  border-bottom-left-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
+    [`@media (max-width: ${MediaQuery.MOBILE.max})`]: {
+      ['& * ']: { height: '245px !important', width: '100% !important' },
+    },
+    [`@media  (min-width: ${MediaQuery.TABLET.min}) and  (max-width: ${MediaQuery.TABLET.max})`]:
+      {
+        ['& * ']: { height: '290px !important', width: '100% !important' },
+      },
+    ['& img']: { background: Colors.specials.bg.illustration },
+  },
+]);
 
-  & > header,
-  div {
-    padding-inline: 1.5rem;
-  }
+const CardContentStyled = styled.div({
+  padding: '1rem 1.5rem 1.5rem',
+  display: 'grid',
+  rowGap: '.75rem',
+});
 
-  & > header {
-    display: flex;
-    align-items: center;
-    padding-block-start: 1rem;
-    margin-block-end: 0.75rem;
+const HeaderStyled = styled.header({
+  display: 'flex',
+  alignItems: 'center',
+  columnGap: '1rem',
+  whiteSpace: 'nowrap',
+});
 
-    & > i {
-      margin-right: 1rem;
-    }
-  }
-
-  & > div {
-    padding: 1.5rem;
-  }
-`;
+const ParagraphStyled = styled.div([
+  ColorNeutral600,
+  {
+    [`@media (min-width: ${MediaQuery.DESKTOP.min})`]: {
+      maxWidth: '23rem',
+    },
+  },
+]);
 
 type WalkthroughCardProps = {
   className?: string;
@@ -77,16 +82,19 @@ export const WalkthroughCard: React.FC<WalkthroughCardProps> = ({
   icon,
 }) => {
   return (
-    <WalkthroughCardStyled className={className}>
-      <picture>{image}</picture>
+    <WalkthroughCardWrapperStyled className={className}>
+      <WalkthroughCardStyled>
+        <CardPictureStyled>{image}</CardPictureStyled>
 
-      <WalkthroughCardContent>
-        <header>
-          {icon && icon}
-          <Heading3>{title}</Heading3>
-        </header>
-        <div>{description}</div>
-      </WalkthroughCardContent>
-    </WalkthroughCardStyled>
+        <CardContentStyled>
+          <HeaderStyled>
+            {icon && icon}
+            <Heading3>{title}</Heading3>
+          </HeaderStyled>
+
+          <ParagraphStyled>{description}</ParagraphStyled>
+        </CardContentStyled>
+      </WalkthroughCardStyled>
+    </WalkthroughCardWrapperStyled>
   );
 };
