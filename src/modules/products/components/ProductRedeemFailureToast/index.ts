@@ -1,1 +1,1 @@
-export {ProductRedeemFailureToast} from './ProductRedeemFailureToast'
+export { ProductRedeemFailureToast } from './ProductRedeemFailureToast';

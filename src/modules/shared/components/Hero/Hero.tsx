@@ -186,6 +186,7 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
               height="1080"
               alt="hero illustration"
               objectFit="cover"
+              priority
             />
           </HeroPictureStyled>
         </HeroStyled>

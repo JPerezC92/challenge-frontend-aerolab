@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import React from 'react';
+import { toast } from 'react-toastify';
 import { AuthenticationContextState } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
+import { ProductRedeemFailureToast } from 'src/modules/products/components/ProductRedeemFailureToast';
+import { ProductRedeemSuccessToast } from 'src/modules/products/components/ProductRedeemSuccessToast';
+import { ProductRedeemEventTrigger } from 'src/modules/products/events/ProductRedeem.event';
 
 import { Product } from 'src/modules/products/models/Product';
 import { ProductsRepository } from 'src/modules/products/service/products.repository';
@@ -87,16 +92,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   productsRepository,
   user,
 }) => {
-  const [isProcessing, setIsProcessing] = React.useState(false);
   const { category, name, img, cost } = product;
+  const { isLoading: isProcessing, mutate: handleRedeemSubmit } = useMutation(
+    async (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      return await productsRepository().redeem(product);
+    },
+    {
+      onSuccess() {
+        ProductRedeemEventTrigger(product);
+        toast(<ProductRedeemSuccessToast product={product} />);
+      },
+      onError() {
+        toast(<ProductRedeemFailureToast />);
+      },
+    }
+  );
 
   const hasEnoughPoints = user?.hasEnoughPoints(cost);
-
-  const handleRedeemSubmit = async () => {
-    setIsProcessing(true);
-    await productsRepository().redeem(product);
-    setIsProcessing(false);
-  };
 
   const buttonChildren = isProcessing ? (
     <>Processing...</>

@@ -17,7 +17,7 @@ import {
 } from 'src/modules/products/containers/ProductsGrid/useQueryProducts/ProductsSortReducer';
 import { useQueryProducts } from 'src/modules/products/containers/ProductsGrid/useQueryProducts/useQueryProducts';
 import { Product } from 'src/modules/products/models/Product';
-import { useChallengeProductsRepository } from 'src/modules/products/service/useChallengeProductsRepository';
+import { ChallengeProductsRepository } from 'src/modules/products/service/ChallengeProductsRepository';
 import { Select } from 'src/modules/shared/components/base/Select';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { RecolorNeutral } from 'src/modules/shared/components/Recolor/Recolor';
@@ -78,8 +78,8 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
   const { products, pagination, filter, sort, queryDispatch } =
     useQueryProducts();
 
-  const productsRepository = useChallengeProductsRepository();
   const { user } = useAuthenticationContext();
+
   React.useEffect(() => {
     if (!!productsDataSource.length) {
       queryDispatch({
@@ -150,7 +150,7 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
             <li key={p.id}>
               <ProductCard
                 product={p}
-                productsRepository={productsRepository}
+                productsRepository={ChallengeProductsRepository}
                 user={user}
               />
             </li>

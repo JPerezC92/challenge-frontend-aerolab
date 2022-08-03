@@ -1,5 +1,3 @@
-import React from 'react';
-import { PointsAddEventTrigger } from 'src/modules/points/events/PointsAdd.event';
 import { PointsAmount } from 'src/modules/points/models/PointsAmount';
 import { Repository } from 'src/modules/shared/service/Repository';
 import { AEROLAB_API_URL } from 'src/modules/shared/utils/constants';
@@ -27,9 +25,9 @@ export const ChallengeUsersRepository: Repository<UsersRepository> = (
 
       const result = await response.json();
 
-      const validated = UserGetEndpointSchema.parse(result);
+      const validatedResult = UserGetEndpointSchema.parse(result);
 
-      return UserEndpointToModelAdapter(validated);
+      return UserEndpointToModelAdapter(validatedResult);
     },
 
     addPoints: async (amount: PointsAmount): Promise<void> => {
@@ -46,17 +44,7 @@ export const ChallengeUsersRepository: Repository<UsersRepository> = (
 
       const result = await response.json();
 
-      const validation = UserPointsPostEndpointSchema.safeParse(result);
-
-      if (!validation.success) {
-        console.log(
-          'An error has occurred while attempting to add points',
-          validation.error
-        );
-        return;
-      }
-
-      PointsAddEventTrigger(amount);
+      UserPointsPostEndpointSchema.parse(result);
     },
   };
 };

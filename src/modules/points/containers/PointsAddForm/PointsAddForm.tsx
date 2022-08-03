@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import { PointsAddFailureToast } from 'src/modules/points/components/PointsAddFailureToast';
 import { PointsAddSuccessToast } from 'src/modules/points/components/PointsAddSuccessToast';
+import { PointsAddEventTrigger } from 'src/modules/points/events/PointsAdd.event';
 import { PointsAmount } from 'src/modules/points/models/PointsAmount';
 import { Button } from 'src/modules/shared/components/base/Button';
 import { Selector } from 'src/modules/shared/components/base/Selector';
@@ -44,6 +45,7 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
     },
     {
       onSuccess: () => {
+        PointsAddEventTrigger(pointsAmount);
         toast(<PointsAddSuccessToast pointsAmount={pointsAmount} />);
       },
       onError: () => {
