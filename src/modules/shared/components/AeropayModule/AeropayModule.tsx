@@ -7,7 +7,7 @@ import { Hr } from 'src/modules/shared/components/base/Hr';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { CrossDefault } from 'src/modules/shared/icons/CrossDefault';
 import { Icon } from 'src/modules/shared/icons/Icon';
-import { useChallengeUsersRepository } from 'src/modules/users/service/useChallengeUsersRepository';
+import { ChallengeUsersRepository } from 'src/modules/users/service/ChallengeUsersRepository';
 
 type AeropayModuleProps = {
   className?: string;
@@ -54,7 +54,7 @@ export const AeropayModule: React.FC<AeropayModuleProps> = ({ onClose }) => {
         <ContentStyled>
           <AeropayCard />
 
-          <PointsAddForm usersRepository={useChallengeUsersRepository()} />
+          <PointsAddForm usersRepository={ChallengeUsersRepository} />
         </ContentStyled>
       </MenuItemStyled>
     </menu>

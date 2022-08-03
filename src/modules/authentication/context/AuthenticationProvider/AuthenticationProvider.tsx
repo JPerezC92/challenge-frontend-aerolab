@@ -1,9 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useReducer } from 'react';
+import { toast } from 'react-toastify';
+import { AuthenticationFailureToast } from 'src/modules/authentication/components/AuthenticationFailureToast';
 import { PointsAddEventListener } from 'src/modules/points/events/PointsAdd.event';
 import { ProductRedeemEventListener } from 'src/modules/products/events/ProductRedeem.event';
-import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';
 import { User } from 'src/modules/users/models/User';
-import { useChallengeUsersRepository } from 'src/modules/users/service/useChallengeUsersRepository';
+import { ChallengeUsersRepository } from 'src/modules/users/service/ChallengeUsersRepository';
 import {
   AuthenticationActionType,
   authenticationInitialState,
@@ -47,48 +49,49 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({
     authenticationReducer,
     authenticationInitialState
   );
-  const usersRepository = useChallengeUsersRepository();
 
-  useAbortableEffect(
-    (abortController) => {
-      const handleAuthentication = async () => {
-        dispatch({ type: AuthenticationActionType.LOGIN });
-
-        const _usersRepository = usersRepository(abortController.signal);
-        const user = await _usersRepository.find();
-
-        if (!user) {
-          return dispatch({
-            type: AuthenticationActionType.FAILED,
-            payload: 'There was an error while attempting to authenticate',
-          });
-        }
-
-        dispatch({
-          type: AuthenticationActionType.SUCCEEDED,
-          payload: user,
-        });
-      };
-
-      handleAuthentication();
-
-      // listening for Events
-      const cleanProductRedeemEventListener =
-        ProductRedeemEventListener(handleAuthentication);
-      const cleanPointsAddEventListener =
-        PointsAddEventListener(handleAuthentication);
-
-      return () => {
-        cleanProductRedeemEventListener();
-        cleanPointsAddEventListener();
-      };
+  const {
+    refetch: refetchLogin,
+    data: user,
+    isSuccess,
+    isError,
+  } = useQuery(
+    ['login'],
+    async ({ signal }) => {
+      dispatch({ type: AuthenticationActionType.LOGIN });
+      const usersRepository = ChallengeUsersRepository(signal);
+      const user = await usersRepository.find();
+      return user;
     },
-    [usersRepository]
+    { onError: () => toast(<AuthenticationFailureToast />), retry: false }
   );
 
   React.useEffect(() => {
-    console.log(state);
-  }, [state]);
+    if (isError) {
+      return dispatch({
+        type: AuthenticationActionType.FAILED,
+        payload: 'There was an error while attempting to authenticate',
+      });
+    }
+
+    if (isSuccess && user) {
+      dispatch({
+        type: AuthenticationActionType.SUCCEEDED,
+        payload: user,
+      });
+    }
+
+    const _refetchLogin = () => refetchLogin();
+
+    const cleanProductRedeemEventListener =
+      ProductRedeemEventListener(_refetchLogin);
+    const cleanPointsAddEventListener = PointsAddEventListener(_refetchLogin);
+
+    return () => {
+      cleanProductRedeemEventListener();
+      cleanPointsAddEventListener();
+    };
+  }, [isError, isSuccess, refetchLogin, user]);
 
   return (
     <AuthenticationContext.Provider value={{ ...state }}>

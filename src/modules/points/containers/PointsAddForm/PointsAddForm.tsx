@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import React from 'react';
+import { toast } from 'react-toastify';
+
+import { PointsAddFailureToast } from 'src/modules/points/components/PointsAddFailureToast';
+import { PointsAddSuccessToast } from 'src/modules/points/components/PointsAddSuccessToast';
 import { PointsAmount } from 'src/modules/points/models/PointsAmount';
 import { Button } from 'src/modules/shared/components/base/Button';
 import { Selector } from 'src/modules/shared/components/base/Selector';
@@ -31,8 +36,21 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
   usersRepository,
   className,
 }) => {
-  const [pointsAmount, setPointsAmount] = useState<PointsAmount>(1000);
-  const [isLoading, setIsLoading] = useState(false);
+  const [pointsAmount, setPointsAmount] = React.useState<PointsAmount>(1000);
+  const { mutate: handleAddPointsSubmit, isLoading } = useMutation(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      return await usersRepository().addPoints(pointsAmount);
+    },
+    {
+      onSuccess: () => {
+        toast(<PointsAddSuccessToast pointsAmount={pointsAmount} />);
+      },
+      onError: () => {
+        toast(<PointsAddFailureToast />);
+      },
+    }
+  );
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -43,13 +61,6 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
     if (!selectPoints.includes(amount)) return;
 
     setPointsAmount(amount);
-  };
-
-  const handleAddPointsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    await usersRepository().addPoints(pointsAmount);
-    setIsLoading(false);
   };
 
   return (
@@ -63,6 +74,7 @@ export const PointsAddForm: React.FC<PointsAddFormProps> = ({
             name="points"
             checked={value === pointsAmount}
             onChange={handleOnChange}
+            disabled={isLoading}
           />
         ))}
       </SelectorsGroupStyled>
