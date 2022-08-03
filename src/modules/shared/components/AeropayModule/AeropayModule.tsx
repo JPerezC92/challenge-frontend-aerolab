@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { AuthenticationContextState } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 
 import { PointsAddForm } from 'src/modules/points/containers/PointsAddForm';
 import { AeropayCard } from 'src/modules/shared/components/AeropayCard';
@@ -9,12 +10,7 @@ import { CrossDefault } from 'src/modules/shared/icons/CrossDefault';
 import { Icon } from 'src/modules/shared/icons/Icon';
 import { ChallengeUsersRepository } from 'src/modules/users/service/ChallengeUsersRepository';
 
-type AeropayModuleProps = {
-  className?: string;
-  onClose?: () => void;
-};
-
-const MenuItemStyled = styled.li({
+const MenuItemStyled = styled.div({
   display: 'flex',
   flexDirection: 'column',
 });
@@ -35,28 +31,36 @@ const ContentStyled = styled.div({
   rowGap: '2.5rem',
 });
 
-export const AeropayModule: React.FC<AeropayModuleProps> = ({ onClose }) => {
+type AeropayModuleProps = {
+  className?: string;
+  onClose?: () => void;
+  user: AuthenticationContextState['user'];
+};
+
+export const AeropayModule: React.FC<AeropayModuleProps> = ({
+  className,
+  onClose,
+  user,
+}) => {
   return (
-    <menu>
-      <MenuItemStyled>
-        <HeaderStyled>
-          <Text1 as="h3">Add Balance</Text1>
+    <MenuItemStyled className={className}>
+      <HeaderStyled>
+        <Text1 as="h3">Add Balance</Text1>
 
-          <ButtonUnstyled type="button" onClick={onClose}>
-            <Icon size="sm">
-              <CrossDefault />
-            </Icon>
-          </ButtonUnstyled>
-        </HeaderStyled>
+        <ButtonUnstyled type="button" onClick={onClose}>
+          <Icon size="sm">
+            <CrossDefault />
+          </Icon>
+        </ButtonUnstyled>
+      </HeaderStyled>
 
-        <Hr />
+      <Hr />
 
-        <ContentStyled>
-          <AeropayCard />
+      <ContentStyled>
+        <AeropayCard user={user} />
 
-          <PointsAddForm usersRepository={ChallengeUsersRepository} />
-        </ContentStyled>
-      </MenuItemStyled>
-    </menu>
+        <PointsAddForm usersRepository={ChallengeUsersRepository} />
+      </ContentStyled>
+    </MenuItemStyled>
   );
 };

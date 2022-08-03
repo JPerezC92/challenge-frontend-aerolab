@@ -21,4 +21,14 @@ export class User {
   public hasEnoughPoints(productCost: number) {
     return this.points >= productCost;
   }
+
+  public formatCreatedAt() {
+    const month = (this.createdAt.getUTCMonth() + 1).toString();
+    const monthFormat = month.length > 1 ? month : '0' + month;
+
+    const year = this.createdAt.getUTCFullYear().toString();
+    const yearlastTwoDigits = year.slice(-2);
+
+    return `${monthFormat}/${yearlastTwoDigits}`;
+  }
 }

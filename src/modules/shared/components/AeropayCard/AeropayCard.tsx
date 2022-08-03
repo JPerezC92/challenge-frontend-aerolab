@@ -1,74 +1,76 @@
-import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import React from 'react';
 
+import { AuthenticationContextState } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
 import { Text1 } from 'src/modules/shared/components/base/Text1';
 import { Text2 } from 'src/modules/shared/components/base/Text2';
 import { Aeropay2 } from 'src/modules/shared/icons/Aeropay2';
 import { Icon } from 'src/modules/shared/icons/Icon';
+import { BackgroundNeutral900 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
+import { ColorNeutral100 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
+import { ElevationDefault } from 'src/modules/shared/theming/sharedStyles/elevation';
 
-export const AeropayCardStyled = styled.div`
-  width: 264px;
-  height: 148px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+export const AeropayCardStyled = styled.div([
+  ElevationDefault,
+  BackgroundNeutral900,
+  {
+    width: '264px',
+    height: '148px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderRadius: '0.5rem',
+    position: 'relative',
+    overflow: ' hidden',
 
-  &::after {
-    background-image: url('/illustrations/single-wave-pattern.svg');
-    background-size: 40% 1rem;
-    content: '';
-    height: 100%;
-    left: 0;
-    mix-blend-mode: soft-light;
-    position: absolute;
-    top: 35%;
-    transform: rotate(-5deg);
-    width: 110%;
-  }
+    ['&::after']: {
+      backgroundImage: "url('/illustrations/single-wave-pattern.svg')",
+      backgroundSize: 'auto 1rem',
+      backgroundPosition: 'top',
+      content: '""',
+      height: '100%',
+      mixBlendMode: 'soft-light',
+      position: 'absolute',
+      top: '30%',
+      transform: 'rotate(-5deg) scaleX(1.7) scaleY(.75)',
+      width: '110%',
+    },
+  },
+]);
 
-  ${({ theme: { Colors } }) =>
-    css`
-      background-color: ${Colors.neutral[900]};
-
-      & > div {
-        margin: 1rem;
-        display: flex;
-        justify-content: space-between;
-
-        & > span,
-        i {
-          color: ${Colors.neutral[100]};
-        }
-      }
-    `}
-`;
+const RowStyled = styled.div([
+  ColorNeutral100,
+  {
+    margin: '1rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+]);
 
 type AeropayCardProps = {
   className?: string;
+  user: AuthenticationContextState['user'];
 };
 
-export const AeropayCard: React.FC<AeropayCardProps> = ({}) => {
+export const AeropayCard: React.FC<AeropayCardProps> = ({
+  className,
+  user,
+}) => {
   return (
-    <AeropayCardStyled>
-      <div>
+    <AeropayCardStyled className={className}>
+      <RowStyled>
         <Text1 as="span">Aerocard</Text1>
 
         <Icon size="sm">
           <Aeropay2 />
         </Icon>
-      </div>
+      </RowStyled>
 
-      <div>
-        <Text2 as="span">John Kite</Text2>
+      <RowStyled>
+        <Text2 as="span">{user?.name}</Text2>
 
-        <Text2 as="span">07/23</Text2>
-      </div>
+        <Text2 as="span">{user?.formatCreatedAt()}</Text2>
+      </RowStyled>
     </AeropayCardStyled>
   );
 };
