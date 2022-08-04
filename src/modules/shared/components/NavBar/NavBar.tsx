@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 import { useAuthenticationContext } from 'src/modules/authentication/context/AuthenticationProvider/AuthenticationProvider';
-import { AerolabLogo } from 'src/modules/shared/components/base/AerolabLogo';
 import { AeroCoins } from 'src/modules/shared/components/AeroCoins/AeroCoins';
+import { AerolabLogo } from 'src/modules/shared/components/base/AerolabLogo';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { DesktopMaxWidth } from 'src/modules/shared/theming/sharedStyles/grid/DesktopMaxWidth';
 

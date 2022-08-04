@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
+import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import * as SelectPrimitive from '@radix-ui/react-select';
 import React from 'react';
 
 import { ButtonUnstyled } from 'src/modules/shared/components/base/Button/Button';
-import { useOnClickOutside } from 'src/modules/shared/hooks/useOnClickOutside';
+import { BackgroundNeutral0 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
 import { ColorNeutral600 } from 'src/modules/shared/theming/sharedStyles/colors/Neutrals';
 import { TextL1Default } from 'src/modules/shared/theming/sharedStyles/text/TextL1';
 
-const CustomSelect = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
+const SelectTriggerStyled = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
   TextL1Default,
   {
     color: Colors.neutral[600],
@@ -19,55 +21,56 @@ const CustomSelect = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
     position: 'relative',
     display: 'inline-flex',
   },
-]);
+]).withComponent(SelectPrimitive.SelectTrigger);
 
-const CustomSelectMenu = styled.menu(({ theme: { Colors } }) => [
-  {
-    position: 'absolute',
-    top: '100%',
-    transform: 'translateY(1rem)',
-    left: '0',
-    minWidth: 'max-content',
-    width: 'inherit',
-    border: `1px solid ${Colors.neutral[300]}`,
-    borderRadius: '1rem',
-    zIndex: '1',
-    background: 'white',
-    paddingBlock: '.5rem',
-    maxHeight: '15.5rem',
-    overflowY: 'auto',
-    overflowX: 'hidden',
+const SelectContentStyled = styled(SelectPrimitive.Content)(
+  ({ theme: { Colors } }) => [
+    BackgroundNeutral0,
+    {
+      border: `1px solid ${Colors.neutral[300]}`,
+      borderRadius: '1rem',
+      paddingBlock: '.5rem',
+      overflow: 'hidden',
+    },
+  ]
+);
 
-    ['&::-webkit-scrollbar']: {
-      width: '12px',
-    },
-    ['&::-webkit-scrollbar-track']: {
-      borderTopRightRadius: '1rem',
-      borderBottomRightRadius: '1rem',
-      boxShadow: `inset 0 0 6px ${Colors.neutral[300]}`,
-    },
-    ['&::-webkit-scrollbar-thumb']: {
-      borderTopRightRadius: '1rem',
-      borderBottomRightRadius: '1rem',
-      background: Colors.brand.light,
-    },
-  },
-]);
+const ScrollAreaStyled = styled(ScrollAreaPrimitive.ScrollArea)({
+  display: 'grid',
+  width: '100%',
+  height: '100%',
+});
 
-const CustomSelectOption = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
+const ScrollAreaViewportStyled = styled(ScrollAreaPrimitive.ScrollAreaViewport)(
+  { width: '100%', height: '100%' }
+);
+
+const ScrollbarStyled = styled(ScrollAreaPrimitive.Scrollbar)({
+  width: '.5rem',
+  paddingBlock: '.25rem',
+});
+
+const ScrollAreaThumbStyled = styled(ScrollAreaPrimitive.ScrollAreaThumb)(
+  ({ theme: { Colors } }) => ({
+    background: Colors.brand.light,
+    borderRadius: '.25rem',
+  })
+);
+
+const SelectItemStyled = styled(ButtonUnstyled)(({ theme: { Colors } }) => [
   TextL1Default,
   ColorNeutral600,
   {
-    width: '100%',
     paddingInline: '1.5rem',
-    paddingBlock: '0.75rem',
+    paddingBlock: '.75rem',
     textAlign: 'left',
-
+    outlineColor: Colors.brand.light2,
     [`&:hover`]: {
       background: Colors.neutral[100],
+      outlineColor: 'transparent',
     },
   },
-]);
+]).withComponent(SelectPrimitive.SelectItem);
 
 const ArrowStyled = styled.span({
   marginInlineStart: 'auto',
@@ -78,7 +81,7 @@ const ArrowStyled = styled.span({
 type SelectProps = {
   options: string[];
   value: string;
-  onChange: (e: { currentTarget: { value: string } }) => void;
+  onChange: (value: string) => void;
 };
 
 export const Select: React.FC<SelectProps> = ({
@@ -86,46 +89,41 @@ export const Select: React.FC<SelectProps> = ({
   value,
   options = [],
 }) => {
-  const [_value, setValue] = React.useState(value || options[0] || '');
   const [toggle, setToggle] = React.useState(false);
   const optionsId = React.useId();
 
-  const selectRef = useOnClickOutside<HTMLButtonElement>(
-    () => setToggle(false),
-    []
-  );
-
   return (
-    <>
-      <CustomSelect
-        role="menubar"
-        tabIndex={0}
-        onClick={() => setToggle((s) => !s)}
-        ref={selectRef}
-      >
-        {_value}
-
+    <SelectPrimitive.Root
+      open={toggle}
+      onOpenChange={setToggle}
+      value={value}
+      onValueChange={onChange}
+    >
+      <SelectTriggerStyled>
+        <SelectPrimitive.Value>{value}</SelectPrimitive.Value>
         <ArrowStyled>▼</ArrowStyled>
+      </SelectTriggerStyled>
 
-        {toggle && (
-          <CustomSelectMenu>
-            {options.map((value) => (
-              <li key={optionsId + value}>
-                <CustomSelectOption
-                  role="option"
-                  onClick={() => {
-                    const _e = { currentTarget: { value } };
-                    onChange(_e);
-                    setValue(value);
-                  }}
-                >
-                  {value}
-                </CustomSelectOption>
-              </li>
-            ))}
-          </CustomSelectMenu>
-        )}
-      </CustomSelect>
-    </>
+      <SelectPrimitive.Portal>
+        <SelectContentStyled>
+          <ScrollAreaStyled type="auto">
+            <SelectPrimitive.SelectViewport>
+              <ScrollAreaViewportStyled>
+                {options.map((value) => (
+                  <SelectItemStyled key={optionsId + value} value={value}>
+                    <SelectPrimitive.SelectItemText>
+                      {value}
+                    </SelectPrimitive.SelectItemText>
+                  </SelectItemStyled>
+                ))}
+              </ScrollAreaViewportStyled>
+            </SelectPrimitive.SelectViewport>
+            <ScrollbarStyled orientation="vertical">
+              <ScrollAreaThumbStyled />
+            </ScrollbarStyled>
+          </ScrollAreaStyled>
+        </SelectContentStyled>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
   );
 };

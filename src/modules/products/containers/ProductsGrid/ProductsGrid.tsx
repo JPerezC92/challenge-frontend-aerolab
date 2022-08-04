@@ -133,10 +133,10 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
         filterControl={
           <Select
             value={filter.fieldValue}
-            onChange={(e) => {
+            onChange={(value) => {
               queryDispatch({
                 type: FilterActionType,
-                payload: e.currentTarget.value,
+                payload: value,
               });
             }}
             options={[ALL_PRODUCTS, ...filter.categoryList]}
