@@ -1,19 +1,17 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
 
 import { ProductCardSkeleton } from 'src/modules/products/components/ProductCardSkeleton';
 import { ProductsGridSkeleton } from 'src/modules/products/components/ProductsGridSkeleton';
 import { ProductsLoadFailureToast } from 'src/modules/products/components/ProductsLoadFailureToast';
 import { ProductsGrid } from 'src/modules/products/containers/ProductsGrid';
-import { Product } from 'src/modules/products/models/Product';
 import { ChallengeProductsRepository } from 'src/modules/products/service/ChallengeProductsRepository';
 import { Heading2 } from 'src/modules/shared/components/base/Heading2';
 import { Container } from 'src/modules/shared/components/Container';
 import { RecolorNeutral } from 'src/modules/shared/components/Recolor';
-import { useAbortableEffect } from 'src/modules/shared/hooks/useAbortableEffect';
 import { MediaQuery } from 'src/modules/shared/theming/DeviceSize';
 import { BackgroundNeutral0 } from 'src/modules/shared/theming/sharedStyles/backgrounds/Neutrals';
 
