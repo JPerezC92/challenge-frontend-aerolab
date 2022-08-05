@@ -45,6 +45,7 @@ const FilterSortContainerStyled = styled.div({
   whiteSpace: 'nowrap',
   alignItems: 'center',
   columnGap: '1rem',
+  maxWidth: '100%',
   [`@media (max-width: ${MediaQuery.MOBILE.max})`]: { width: '100%' },
   [`@media (max-width: ${MediaQuery.DESKTOP.max})`]: {
     [`& >` + `${Text1}`]: { display: 'none' },
