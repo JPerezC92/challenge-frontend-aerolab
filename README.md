@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aerolab Frontend Challenge - **[Go to the App](https://aerolab-frontend-challenge-beta.vercel.app/)**
 
-## Getting Started
+**[Here is more information](https://github.com/Aerolab/frontend-developer-coding-challenge)**.
 
-First, run the development server:
+<img src="./public/github-cover-aerolab-frontend-developer-coding-challenge.png" alt="aerolab cover"/>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [React](https://reactjs.org/)
+- [NextJS](https://nextjs.org/)
+- [Emotion](https://emotion.sh/docs/introduction)
+- [Typescript](https://www.typescriptlang.org/)
+- [radix-ui](https://www.radix-ui.com/)
+- [react-query](https://tanstack.com/query/v4)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Requirements
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Level 1 - It works! ⚙️
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Make a desktop version
+- Each product should have a visible price in points.
+- Link to the project GitHub repository (footer)
+- The user should be able to sort products by price, from highest to lowest, and vice-versa.
+- The user should be able to see how many points they have in their account.
+- There should be a clear way for the user to distinguish those products that they can redeem from those they cannot.
+- A “Redeem” button should be available for those products that the user has enough points to claim.
+- A “Redeem now” option should appear when the user interacts with a product that they have enough points to claim.
+- When the user doesn’t have enough points for a product, they should be able to see how many more points they need to claim it.
+- The user should not be able to redeem a product for which they don’t have enough points.
+- When the user clicks on the Redeem now button, the system should automatically deduct the item’s price from the users’ points.
+- The user should be able add points to their account
 
-## Learn More
+### Level 2 - Eye Candy 💅
 
-To learn more about Next.js, take a look at the following resources:
+- _All of above_
+- Make a mobile responsive version
+- The "view all products" button (on Hero/Header section) should scroll view to listed products
+- Make the "Browse, Choose, Enjoy" section
+- Put all your effort into making the site look beautiful
+- Pay attention to details and the design system we provide you
+- The user should be able to filter products by category
+- The user should be able to use the pagination to view more listed products
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Level 3 - Mind-blowing 🤯
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- _All of above_
+- Make a tablet responsive version
+- Make some visual tweaks (animations, micro interactions, etc)
+- Put all your effort on website performance (images, web vitals, network optimization, etc)
+- Be careful about SEO (metadata, markup semantics, SSR, etc.)
+- Be careful about Accesibility (keyboard navigation, narrator, markup semantics, etc.)
+- Be careful about environment variables security
+- If you want you can make some unit or integration tests
